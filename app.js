@@ -10,12 +10,7 @@ app.get("/", (req, res) => {
 app.get("/:verb/:adjective/:noun", (req, res) => {
   const { verb, adjective, noun } = req.params;
   res.send(
-    "Congratulations on starting a new project called " +
-      verb +
-      "-" +
-      adjective +
-      "-" +
-      noun
+    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}`
   );
 });
 
@@ -57,9 +52,9 @@ app.get("/pokemon/search", (req, res) => {
 app.get("/pokemon/:index", (req, res) => {
   const { index } = req.params;
   if (pokemon[index]) {
-    res.json(pokemon[index])
+    res.json(pokemon[index]);
   } else {
-    res.send(`Sorry, no pokemon found at ${index}`)
+    res.send(`Sorry, no pokemon found at ${index}`);
   }
 });
 
