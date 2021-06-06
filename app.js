@@ -28,6 +28,15 @@ app.get("/bugs/:number_of_bugs", (req, res) => {
   }
 });
 
-// /href.*201.*Pull one down\, patch it around/
+
+const pokemon = require("./pokemon.json");
+app.get("/pokemon", (req, res) => {
+    let str = "<ul>";
+    pokemon.forEach(pokemon=>{
+        str += "<li>" + pokemon.name + "</li>";
+    })
+    str += "</ul>"
+    res.json(pokemon);
+  });
 
 module.exports = app;
