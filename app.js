@@ -22,6 +22,7 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
     );
   }
 });
+
 app.get("/bugs", (req, res) => {
   res.send(
     `<div><h1>99 little bugs in the code</h1><a href="/bugs/101">Pull one down, patch it around</a></div>`
@@ -37,19 +38,6 @@ app.get("/pokemon/search", (req, res) => {
     }
   });
   res.json(searchedPokemon);
-
-  //   const pokemonName = pokemon.map((singlePokemon) => {
-  //     return singlePokemon.name.toLowerCase();
-  //   });
-
-  //   res.json(pokemonName);
-
-  //   if (pokemonName.indexOf(name.toLowerCase())) {
-  //     const id = pokemonName.indexOf(name);
-  //     // res.json(pokemon[id]);
-  //   }else{
-  //     res.json([])
-  //   }
 });
 
 app.get("/pokemon/:index", (req, res) => {
