@@ -34,7 +34,7 @@ app.get("/pokemon/search?", (req, res) => {
   const { name } = req.query;
   res.json(
     pokemon.filter((pocketmonster) => {
-      return pocketmonster.name === name || pocketmonster.name.toUpperCase() === name;
+      return pocketmonster.name === name || pocketmonster.name.toUpperCase() === name.toUpperCase();
     })
   );
 });
