@@ -59,6 +59,20 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
 	}
 });
 
+app.get("/pokemon-pretty/", (req, res) => {
+	res.send();
+});
+
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+	const { indexOfArray } = req.params;
+	if (pokemon[indexOfArray]) {
+		res.send(`<h1>${pokemon[indexOfArray].name}</h1>
+    <img src="${pokemon[indexOfArray].img}"/>`);
+	} else {
+		res.status(404).send(`Sorry, no pokemon found at ${indexOfArray}`);
+	}
+});
+
 module.exports = app;
 
 // req.query: directly access the parsed query string parameters
