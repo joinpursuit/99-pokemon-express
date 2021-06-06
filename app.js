@@ -23,7 +23,7 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
   if (numberOfBugs <= 199) {
     res.send(message);
   } else {
-    res.send("Too many bugs!! Start over!");
+    res.send(`Too many bugs!! Start over! <a href='/bugs'>Start over</a>`);
   }
 });
 
