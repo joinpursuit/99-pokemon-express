@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
-const pokemon = require("./pokemon.json")
+const pokemon = require("./models/pokemon.json")
+// console.log(pokemon[0])
 
 
 app.get("/:verb/:adjective/:noun", (req, res) => {
@@ -26,8 +27,13 @@ app.get("/bugs/:numberOfBugs", (req, res) =>{
     <a href ="/bugs/${Number(numberOfBugs) + Number(2)}">Pull one down, patch it around</a>`)
 } else {
     res.send(`<a href="/">Too many bugs!! Start over!</a>`)
-
 }
+})
+
+app.get("/pokemon", (req, res) =>{
+    console.log()
+    //const pokemon = 
+    // res.json({})
 })
 
 
