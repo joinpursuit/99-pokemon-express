@@ -1,5 +1,8 @@
+const { response } = require("express");
 const express = require("express");
 const app = express();
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[0]);
 
 app.get("/", (req, res) => {
     res.send("Welcome 99 Pokemon");
@@ -7,12 +10,15 @@ app.get("/", (req, res) => {
 
 app.get("/bugs/:id", (req, res) =>{
     const{id} = req.params;
-    let bugPull = id ++;
-    res.send(`${id} little bugs in the code <a href=/bugs/${Number(id)}${bugPull}></a>` )
+    if(id < 200){
+     res.send(`${id} little bugs in the code <a href=/bugs/${Number(id) + 2}>Pull one down, patch it around</a>` )
+    }else{
+        res.send("<a href=/bugs>Too many bugs!! Start over!</a>")
+    }
 })
 
 app.get("/bugs", (req,res) => {
-   res.send(` <h1>99 little bugs in the code</h1> <a href=/bugs/101>pull one down, patch it around</a>`)
+   res.send(` <h1>99 little bugs in the code</h1> <a href=/bugs/101>Pull one down, patch it around</a>`)
 });
 
 
@@ -22,5 +28,25 @@ app.get("/bugs", (req,res) => {
     res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}`);
     
   });
+
+  app.get("/pokemon", (request, response) =>{
+      response.json(pokemon);
+  })
+
+  app.get("/pokemon/search?", (req, res) =>{
+    const {name} = req.query;
+    res.json(pokemon.filter((pokemen) =>{
+        return pokemen.name.toLowerCase() === name.toLowerCase()
+    }));
+})
+
+  app.get("/pokemon/:indexOfArray", (req, res) =>{
+      const {indexOfArray} = req.params;
+      if(pokemon[indexOfArray]){
+          res.json(pokemon[indexOfArray])
+      }else{
+          res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+      }
+  })
 
   module.exports = app;
