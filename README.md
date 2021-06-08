@@ -9,7 +9,7 @@ Here, we will build 3 small projects in one to keep learning express.
 - `cd` to the directory where you cloned it
 - `npm install` to install dependencies that are already included in the `package.json`
 - `npm test` to run the tests
-- `npm install express dotenv` to install new dependencies express and dotenv
+- `npm install express dotenv` to install new dependencies express and  dotenv
 - `touch app.js server.js .env`
 - go into `package.json` and put `server.js` as the value for the key `main`
 
