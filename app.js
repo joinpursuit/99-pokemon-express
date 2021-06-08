@@ -42,12 +42,8 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
   if (numberOfBugs < 200) {
     res.send(`${numberOfBugs} little bugs in the code <br>
     ${numberOfBugs} little bugs <br>
-    <a href="/bugs/${Number(numberOfBugs) + 2}">
-        Pull one down, <br>
-        Patch it around <br>
-    </a>
+    <a href="/bugs/${Number(numberOfBugs) + 2}">Pull one down, patch it around</a> <br>
     ${Number(numberOfBugs) + 2} bugs in the code <br>
-    [/href.*${Number(numberOfBugs) + 2}.*Pull one down\, patch it around/]
     `);
 
   } else {
