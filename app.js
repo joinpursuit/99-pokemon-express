@@ -8,27 +8,27 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pokemon", (req, res) => {
-  res.json(pokemon[0])
-})
-
-app.get("/pokemon/search", (req, res)=> {
-  const {name} = req.query
-  const {search} = req.params
-  if(search){
-    res.json(pokemon[name])
-  }
-})
-app.get("/pokemon/:indexOfArray", (req, res)=>{
-  const{indexOfArray} = req.params
-  if (pokemon[indexOfArray]) {
-    res.json({
-      pokemon: pokemon[indexOfArray],
-    });
-  } else {
-    res.status(404).send(`Sorry, no pokemon found at ${pokemon[indexOfArray]}`);
-  }
+  res.json(pokemon);
 });
 
+app.get("/pokemon/search", (req, res) => {
+  const { name } = req.query;
+  for (let i = 0; i < pokemon.length; i++)
+    if (name.toLowerCase() === pokemon[i].name.toLowerCase()) {
+      res.json([pokemon[i]]);
+    } else {
+      res.json([]);
+    }
+});
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (pokemon[indexOfArray]) {
+    res.json(pokemon[indexOfArray]);
+  } else {
+    res.status(404).send(`Sorry, no pokemon found at ${[indexOfArray]}`);
+  }
+});
 
 app.get("/bugs", (req, res) => {
   res.send(`<h1>99 little bugs in the code</h1>
@@ -59,8 +59,6 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
     res.status(404).send(`<a href="/bugs">Too many bugs!! Start over!</a>`);
   }
 });
-
-
 
 module.exports = app;
 
