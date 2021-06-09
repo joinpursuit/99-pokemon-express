@@ -61,4 +61,27 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
   }
 });
 
+app.get("/pokemon-pretty/", (req, res) => {
+  const pokeNames = pokemon.map((pokemon) => pokemon.name);
+  
+  pokeNames.map((name, i) => console.log(i + name));
+  res.send(
+    pokeNames
+      .map((name, i) => `<a href="/pokemon-pretty/${i}">${name}</a> <br>`)
+      .join(" ")
+  );
+});
+
+
+
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (pokemon[indexOfArray]) {
+    res.send(
+      `<h1>${pokemon[indexOfArray].name}</h1> <br> <img src=${pokemon[indexOfArray].img} > <br> <h3>Happiness: ${pokemon[indexOfArray].misc.happiness}</h3>`
+    );
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
 module.exports = app;
