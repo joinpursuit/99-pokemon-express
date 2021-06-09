@@ -6,29 +6,37 @@ app.get("/pokemon", (req, res) => {
   res.send(pokemon);
 });
 
-app.get("/pokemon/:indexOfArray", (req, res) => {
-  const { indexOfArray } = req.params;
-  if(pokemon[indexOfArray]){
-    res.send(pokemon[indexOfArray]);
-  } else {
-    res.send(`Sorry, no pokemon found at ${indexOfArray}`)
-  }
+app.get("/pokemon/search", (req, res) => {
+  const { name } = req.query;
+  pokemon.forEach((el) => {
+    if (name.toLowerCase() === el.name.toLowerCase()) {
+      res.send([el]);
+    } else {
+      res.send([]);
+    }
+  });
 });
 
-app.get("/pokemon/search", (req, res) => {
-  const { name } = req.query
-  res.send(name)
-})
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (pokemon[indexOfArray]) {
+    res.send(pokemon[indexOfArray]);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
 
 app.get("/bugs/:numberOfBugs", (req, res) => {
   const { numberOfBugs } = req.params;
 
   if (numberOfBugs < 200) {
-    res.send(`${numberOfBugs} little bugs in the code <a href=${`/bugs/${Number(numberOfBugs) + 2}`}>Pull one down, patch it around</a>`);
-  } else {
     res.send(
-     `<a href=${"/bugs"}>Too many bugs!! Start over!</a>`
+      `${numberOfBugs} little bugs in the code <a href=${`/bugs/${
+        Number(numberOfBugs) + 2
+      }`}>Pull one down, patch it around</a>`
     );
+  } else {
+    res.send(`<a href=${"/bugs"}>Too many bugs!! Start over!</a>`);
   }
 });
 
