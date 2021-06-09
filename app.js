@@ -1,6 +1,34 @@
 const express = require('express')
+const pokemon = require('./models/pokemon.json')
 
 const app = express()
+
+app.get('/', (req, res) => {
+	res.send('Welcome 99 Pokemon')
+})
+
+app.get('/pokemon', (req, res) => {
+	res.json(pokemon)
+})
+
+app.get('/pokemon/search', (req, res) => {
+	const { name } = req.query
+	const search = pokemon.find((el) => el.name.toLowerCase() === name.toLowerCase())
+	if (!search) {
+		res.send([])
+	} else {
+		res.send([search])
+	}
+})
+
+app.get('/pokemon/:indexOfArray', (req, res) => {
+	const { indexOfArray } = req.params
+	if (pokemon[indexOfArray]) {
+		res.send(pokemon[indexOfArray])
+	} else {
+		res.send(`Sorry, no pokemon found at ${indexOfArray}`)
+	}
+})
 
 app.get('/:verb/:adjective/:noun', (req, res) => {
 	const { verb, adjective, noun } = req.params
@@ -20,8 +48,8 @@ app.get('/bugs/:numberOfBugs', (req, res) => {
     <strong>${numberOfBugs} little bugs</strong><br>
     <a href='/bugs/${Number(numberOfBugs) + 2}'>Pull one down, patch it around</a>`)
 	} else {
-    res.send(`Too many bugs!! Start over!' <a href='/bugs/'>Start over</a>`)
-  }
+		res.send(`Too many bugs!! Start over!' <a href='/bugs/'>Start over</a>`)
+	}
 })
 
 //export
