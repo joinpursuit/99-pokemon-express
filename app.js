@@ -39,16 +39,27 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
 app.get("/pokemon", (req,res) => {
     res.send(pokemon)
 })
+// app.get("/pokemon/search", (req,res) => {
+//     const {name} = req.query
+//     const caseIgnored = name.toLowerCase()
+//     for(let i = 0; i < pokemon.length; i++){
+//         if(caseIgnored === pokemon[i].caseIgnored) {
+//             res.send([pokemon[i]]);
+//         } else {
+//             res.send([])
+//         }
+//     }
+// })
 app.get("/pokemon/search", (req,res) => {
-    const {name} = req.query
-    const caseIgnored = name.toLowerCase()
-    for(let i = 0; i < pokemon.length; i++){
-        if(caseIgnored === pokemon[i].caseIgnored) {
-            res.send([pokemon[i]]);
-        } else {
-            res.send([])
-        }
-    }
+  const {name} = req.query
+  const caseIgnored = name.toLowerCase()
+  for(let i = 0; i < pokemon.length; i++){
+      if(caseIgnored === pokemon[i].name.toLowerCase()) {
+          res.send([pokemon[i]]);
+      } else {
+          res.send([])
+      }
+  }
 })
 
 app.get("/pokemon/:indexOfArray", (req,res) => {
