@@ -2,8 +2,6 @@ const express = require("express");
 const app = express();
 const pokemon = require("./models/pokemon.json");
 
-//app.set('case sensitive routing', true);
-
 app.get("/:verb/:adjective/:noun", (req, res) => {
   const { verb, adjective, noun } = req.params;
   res.send(
