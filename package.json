@@ -10,7 +10,7 @@
   "name": "99-pokemon-express",
   "version": "1.0.0",
   "main": "server.js",
-  "author": "K. Rafalski",
+  "author": "Miguel C",
   "license": "ISC",
   "description": "",
   "devDependencies": {
