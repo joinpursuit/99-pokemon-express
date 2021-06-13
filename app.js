@@ -28,10 +28,10 @@ app.get("/bugs", (req, res) => {
 //Route 4
 app.get("/bugs/:numberOfBugs", (req, res) => {
     const {numberOfBugs} = req.params;
-    if(numberOfBugs >= 200){
-        res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`)
+    if(numberOfBugs < 200){
+        res.send(`${numberOfBugs} little bugs in the code <br> <a href="/bugs/${Number(numberOfBugs)+2}">Pull one down, patch it around</a>`)
     }else{
-        res.send(`<a href="/bugs/${Number(numberOfBugs)+2}">${numberOfBugs} little bugs in the code</a>`)
+        res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`)
     }
 })
 
