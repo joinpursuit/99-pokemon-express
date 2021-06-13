@@ -13,7 +13,7 @@ app.use((req,res, next) =>{
  } )
 
 app.get("/", (req, res) => { 
-    res.status(200).send(`Welcome to Express`)
+    res.status(200).send(`Welcome 99 Pokemon`)
 })
 
 
@@ -24,6 +24,12 @@ res.send("Congratulations on starting a new project called jumping-joyous-jellyb
  app.use("/bugs", bugs)
 
  app.use("/pokemon", pokemon)
+
+ 
+ app.get("/:verb/:adjective/:noun", (req, res) => {
+    const {verb, adjective, noun} = req.params;
+    res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}`)
+})
 
  app.get("*", (req, res) => { 
     res.status(404).send("Page not found.")

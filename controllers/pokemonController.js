@@ -27,8 +27,9 @@ pokemon.get("/" , (req, res) => {
     const query = req.query
     
     if( query.name){ 
-        searchResult = pokemonMonsters.filter(pokemon => pokemon.name.toLowerCase() === query.name)
-        res.status(200).send(searchResult)
+        searchResult = pokemonMonsters.filter(pokemon => pokemon.name.toLowerCase() === query.name.toLowerCase())
+       res.status(200).send(searchResult)
+
      }
  })
 
@@ -39,7 +40,7 @@ pokemon.get("/" , (req, res) => {
          res.status(200).send(pokemonMonsters[indexOfArray])
      }else {
 
-        res.status(400).send(`sorry, no pokemon found at /pokemon/${indexOfArray}`)
+        res.status(400).send(`Sorry, no pokemon found at ${indexOfArray}`)
      }
   })
 

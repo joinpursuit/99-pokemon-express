@@ -25,30 +25,30 @@ const validateUrl = (req, res, next) =>{
     res.send(`${bugCount} little bugs in the code <a href="/bugs/101">pull one down, patch it around</a> `)
 })
 
-bugs.get("/101", (req, res) => {
-    bugCount += 2
-    res.send(`${bugCount} little bugs in the code`)
-    bugCount = 99
-})
+// bugs.get("/101", (req, res) => {
+//     bugCount += 2
+//     res.send(`${bugCount} little bugs in the code`)
+//     bugCount = 99
+// })
 
 
 bugs.get("/:numberOfBugs", (req,res) => { 
     const { numberOfBugs }  = req.params
 
-    if (prevCount){ 
-        bugCount += 2
-        prevCount = false
-     }else {
-         bugCount += parseInt(numberOfBugs)
-     }
+    // if (prevCount){ 
+    //     bugCount += 2
+    //     prevCount = false
+    //  }else {
+    //      bugCount += parseInt(numberOfBugs)
+    //  }
 
 
-    if (bugCount<200) {
-        res.send(`${bugCount} little bugs in the code <a href="/bugs/${bugCount+2}">pull one down, patch it around</a> `)   
-        prevCount = true
+    if (numberOfBugs<200) {
+        res.send(`${numberOfBugs} little bugs in the code <a href="/bugs/${Number(numberOfBugs)+2}">Pull one down, patch it around</a> `)   
+        // prevCount = true
     }else {
-        bugCount = 99
-        res.send(`Start Over : <a href="/bugs">start over</a>`)
+        // bugCount = 99
+        res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`)
     }
 })
 
