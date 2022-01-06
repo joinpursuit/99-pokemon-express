@@ -86,7 +86,7 @@ describe("app", () => {
       const response = await request(app).get("/run/runny/runner");
 
       expect(response.text).toEqual(
-        "Congratulations on starting a new project called run-runny-runner"
+        "Congratulations on starting a new project called run-runny-runner!"
       );
     });
   });
