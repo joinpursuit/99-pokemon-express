@@ -30,6 +30,13 @@ app.get("/pokemon", (request, response) => {
   response.send(pokemon);
 });
 
+app.get("/pokemon/search/:pokemonName", (request, response) => {
+  console.log(request.query);
+  const { name } = request.query;
+  const found = pokemon.find((poke) => poke.name.toLowerCase() === name.toLowerCase());
+  found ? response.send(found) : response.send([]);
+});
+
 app.get("/pokemon/:indexOfArray", (request, response) => {
   const { indexOfArray } = request.params;
   console.log(indexOfArray);
@@ -38,12 +45,12 @@ app.get("/pokemon/:indexOfArray", (request, response) => {
     : response.send(`Sorry, no pokemon found at ${indexOfArray}`);
 });
 
-// app.get("/pokemon/:indexOfArray", (request, response) => {
-//   console.log(request.query);
-//   const { name } = request.query;
-//   const found = pokemon.find(poke => poke.name > name)
-//   response.send(found);
-// });
+app.get("/:verb/:adjective/:noun", (request, response) => {
+  console.log(request.params);
+  response.send(
+    `Congratulations on starting a new project called ${request.params.verb}-${request.params.adjective}-${request.params.noun}`
+  );
+});
 // app.get("/rocks/:index", (request, response) => {
 //   console.log("get to /rocks");
 //   console.log(request.params);
