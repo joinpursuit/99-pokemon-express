@@ -1,6 +1,8 @@
 const express = require("express");
 const req = require("express/lib/request");
 const app = express();
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[0]);
 
 
 app.get("/:verb/:adjective/:noun", (request, response) => {
@@ -32,9 +34,18 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
     }
 })
 
+app.get("/pokemon", (request, response) => {
+    response.send(pokemon)
+})
 
-
-
+app.get("/pokemon/:indexOfArray", (request, response) => {
+    const { indexOfArray } = request.params;
+    if(indexOfArray > indexOfArray.length) {
+        response.send(`Sorry, no pokemon found at ${indexOfArray}`)
+    } else {
+        response.send(pokemon[indexOfArray])
+    }
+})
 
 
 
