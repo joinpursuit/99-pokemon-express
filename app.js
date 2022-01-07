@@ -22,9 +22,22 @@ app.get("/bugs", (request, response) => {
 });
 
 app.get("/bugs/101", (request, response) => {
-  response.send(
-    `101 little bugs in the code <a href = /bugs> pull one down, patch it around </a> + 2`
-  );
+  response.send(`101 little bugs in the code
+  <a href = /bugs/103> pull one down, patch it around </a>`);
+});
+
+app.get("/bugs/:numberOfBugs", (request, response) => {
+  const { numberOfBugs } = request.params;
+
+  if (numberOfBugs < 200) {
+    response.send(
+      `${numberOfBugs} little bugs in the code <a href = /bugs/${
+        Number(numberOfBugs) + 2
+      }> pull one down, patch it around </a>`
+    );
+  } else {
+    response.send(`<a href = /bugs> "Too many bugs!! Start over!"</a>`);
+  }
 });
 
 // EXPORT
