@@ -26,6 +26,12 @@ app.get('/pokemon', (req, res) => {
     res.send(pokemon)
 })
 
+app.get('/pokemon/search', (req, res) => {
+    const { name: nameSearched } = req.query
+    console.log("Get /Pokemon")
+    res.send(pokemon.filter(({name})=> name.toLowerCase() === nameSearched.toLowerCase()))
+})
+
 app.get('/:verb/:adjective/:noun', (req, res) => {
     console.log("Get /:verb/:adjective/:noun")
     const { verb, adjective, noun} = req.params
