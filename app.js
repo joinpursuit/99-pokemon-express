@@ -16,7 +16,15 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
 app.get("/bugs", (request, response) => {
     console.log("GET request received to route: /bugs");
     const message = "99 little bugs in the code"
-    response.send(`<h1>${message}</h1>`);
+    const linkMessage = "pull one down, patch it around"
+    response.send(`<h1>${message}</h1> 
+    <a href="https://http://localhost:8888/bugs/101">${linkMessage}</a>`);
+});
+
+app.get("/bugs/:numberOfBugs", (request, response) => {
+    console.log("GET request received to route: /bugs/:numberOfBugs");
+    const { numberOfBugs } = request.params
+    response.send(`${numberOfBugs} little bugs in the code`);
 });
 
 module.exports = app;
