@@ -41,4 +41,11 @@ app.get("/pokemon/search", (request, response) => {
   response.send(pokemonName ? [pokemonName] : []);
 });
 
+app.get("/pokemon/:index", (request, response) => {
+  const { index } = request.params;
+  response.send(
+    pokemon[Number(index)] || "Sorry, no pokemon found at " + index
+  );
+});
+
 module.exports = app;
