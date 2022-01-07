@@ -15,9 +15,30 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
 })
 
 //99 Little Bugs In the Code
+const bugs = 99
 app.get("/bugs", (request, response) => {
     console.log("GET request received to route: /bugs")
-    response.send("99 little bugs in the code")
+    response.send(`
+        <p>${bugs} little bugs in the code</p>
+        <a href="/bugs/${bugs+2}">pull one down, patch it around</a>
+    `)
+})
+
+app.get("/bugs/:numberOfBugs", (request, response) => {
+    console.log("GET request received to route: /bugs/:numberOfBugs")
+    const { numberOfBugs } = request.params
+    const sum = Number(numberOfBugs)+2
+    if (numberOfBugs < 200) {
+        response.send(`
+        <p>${numberOfBugs} little bugs in the code</p>
+        <a href="/bugs/${sum}">pull one down, patch it around</a>
+        `)
+    } else {
+        response.send(`
+        <p>${numberOfBugs} little bugs in the code</p>
+        <a href="/bugs">Start Over</a>
+        `)
+    }
 })
 
 module.exports = app;
