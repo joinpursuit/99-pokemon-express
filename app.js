@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[1]);
 
 app.get("/", (request, response) => {
   console.log("GET request received to route:  /");
@@ -23,6 +25,7 @@ app.get("/bugs", (request, response) => {
 });
 
 app.get("/bugs/:number", (request, response) => {
+    console.log("GET request received to route:  /bugs/:number");
   const { number } = request.params;
   if (number < 200) {
     response.send(
@@ -34,5 +37,13 @@ app.get("/bugs/:number", (request, response) => {
     response.send("<a href=/bugs>Too many bugs!! Start over!</a>");
   }
 });
+
+app.get("/pokemon", (request, response) => {
+    console.log("GET request received to route:  /pokemon");
+  response.send(pokemon);
+});
+
+
+
 
 module.exports = app;
