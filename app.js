@@ -14,6 +14,13 @@ app.get('/:verb/:adjective/:noun', (request, response) => {
     );
 });
 
+app.get('/bugs', (request, response) => {
+    response.send(`<h1>99 little bugs in the code</h1> 
+    <a href='http://localhost:8888/bugs/101'>Pull one down, patch it around</a>`
+    );
+});
+
+
 module.exports = app;
 
 // http://localhost:8888 
