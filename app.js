@@ -12,8 +12,9 @@ app.get("/jumping/joyous/jellybean",(request,response) => {
 })
 
 app.get("/bugs",(request,response) => {
-    response.send(`99 little bugs in the code 
-    <a href = /bugs/101> pull one down, patch it around</a>`)
+    response.send(`99 little bugs in the code
+    <a href = /bugs/101> pull one down, patch it around</a>  
+    `)
 })
 
 app.get("/bugs/101",(request,response) => {
@@ -25,7 +26,7 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
     const {numberOfBugs} = request.params
      
     if (numberOfBugs < 200){
-        response.send(`<a href = /bugs/${Number(numberOfBugs)+ 2} > pull one down, patch it around</a>${numberOfBugs} little bugs in the code
+        response.send(`${numberOfBugs} little bugs in the code <a href = /bugs/${Number(numberOfBugs)+ 2} > Pull one down, patch it around</a> 
     `)
 } else {
     response.send( `<a href = /bugs> Too many bugs!! Start over!</a>`)
