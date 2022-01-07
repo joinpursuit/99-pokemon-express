@@ -32,6 +32,12 @@ app.get('/pokemon/search', (req, res) => {
     res.send(pokemon.filter(({name})=> name.toLowerCase() === nameSearched.toLowerCase()))
 })
 
+app.get('/pokemon/:index', (req, res) => {
+    console.log("Get /pokemon/:index")
+    const { index } = req.params
+    res.send(pokemon[index] || `Sorry, no pokemon found at ${index}`)
+})
+
 app.get('/:verb/:adjective/:noun', (req, res) => {
     console.log("Get /:verb/:adjective/:noun")
     const { verb, adjective, noun} = req.params
