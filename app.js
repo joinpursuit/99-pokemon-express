@@ -1,7 +1,23 @@
 const express = require("express");
 const app = express();
+const engine = require('express-handlebars');
 const pokemon = require("./models/pokemon");
 // console.log(pokemon[1]);
+
+// // Handlebars Middleware
+app.engine('handlebars', engine.engine());
+app.set('view engine', 'handlebars');
+
+// let pokemonList 
+app.get("/pokemon-pretty", (request, response) => {
+  console.log("GET request received to route:  /pokemon-pretty/");
+  response.render('index',   {title: 'pokemon List', pokemon
+
+});
+});
+
+
+
 
 app.get("/", (request, response) => {
   console.log("GET request received to route:  /");
@@ -40,12 +56,12 @@ app.get("/bugs/:number", (request, response) => {
 
 app.get("/pokemon", (request, response) => {
   console.log("GET request received to route:  /pokemon");
-  response.send(pokemon);
+  response.json(pokemon);
 });
 
 app.get("/pokemon/search?", (request, response) =>{
     const {name} = request.query;
-    if(!pokemon) return []
+    if(!pokemon.length) return []
     response.send(pokemon.filter(pkmon => pkmon.name.toLowerCase().includes(name.toLowerCase())));
   })
  
@@ -60,14 +76,8 @@ app.get("/pokemon/:indexOfArray", (request, response) => {
   }
 });
 
-let pokemonList = ''
-app.get("/pokemon-pretty/", (request, response) => {
-  console.log("GET request received to route:  /pokemon-pretty/");
-  response.json(pokemon.map(pkmon => {
-     return  `${pkmon.name} ${pkmon.img}` 
- }) 
- )
-});
+
+
 
 
 
