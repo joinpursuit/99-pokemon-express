@@ -17,6 +17,7 @@ app.set('view engine', 'handlebars');
 //Not helpful 
 // https://github.com/expressjs/express/issues/3403
 
+//Thanks to José Mejia for helping me fix this (TypeError: this.engine is not a function) and rendering the image 
 
 // let pokemonList 
 app.get("/pokemon-pretty", (request, response) => {
