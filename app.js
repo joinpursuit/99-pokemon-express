@@ -20,6 +20,11 @@ app.get('/bugs', (request, response) => {
     );
 });
 
+app.get('/pokemon', (request, response) => {
+    response.send(pokemon)
+});
+
+
 
 module.exports = app;
 
