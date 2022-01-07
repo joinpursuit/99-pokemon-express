@@ -60,6 +60,15 @@ app.get("/pokemon/:indexOfArray", (request, response) => {
   }
 });
 
+let pokemonList = ''
+app.get("/pokemon-pretty/", (request, response) => {
+  console.log("GET request received to route:  /pokemon-pretty/");
+  response.json(pokemon.map(pkmon => {
+     return  `${pkmon.name} ${pkmon.img}` 
+ }) 
+ )
+});
+
 
 
 
