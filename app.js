@@ -30,11 +30,11 @@ app.get("/pokemon", (request, response) => {
   response.send(pokemon);
 });
 
-app.get("/pokemon/search/:pokemonName", (request, response) => {
+app.get("/pokemon/search/", (request, response) => {
   console.log(request.query);
   const { name } = request.query;
   const found = pokemon.find((poke) => poke.name.toLowerCase() === name.toLowerCase());
-  found ? response.send(found) : response.send([]);
+  found ? response.send([found]) : response.send([]);
 });
 
 app.get("/pokemon/:indexOfArray", (request, response) => {
@@ -51,32 +51,5 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
     `Congratulations on starting a new project called ${request.params.verb}-${request.params.adjective}-${request.params.noun}`
   );
 });
-// app.get("/rocks/:index", (request, response) => {
-//   console.log("get to /rocks");
-//   console.log(request.params);
-//   response.send(rock[request.params.index]);
-// });
-
-// app.get("/rocks/:index", (request, response) => {
-//   console.log("get to /rocks");
-//   response.send(rock[rock.indexOf(request.params.index)]);
-// });
-
-// app.get("/hello/:first/:last", (request, response) => {
-//   console.log("get to /rocks");
-//   console.log(request.params);
-//   response.send(
-//     `Hello, ${request.params.first.charAt(0).toUpperCase() + request.params.first.slice(1)} ${
-//       request.params.last.charAt(0).toUpperCase() + request.params.last.slice(1)
-//     }`
-//   );
-// });
-
-// app.get("/add", (request, response) => {
-//   console.log("/add");
-//   console.log(request.query);
-//   const { num1, num2 } = request.query;
-//   response.send("is:" + (Number(num1) + Number(num2)));
-// });
 
 module.exports = app;
