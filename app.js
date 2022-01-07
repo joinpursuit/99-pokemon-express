@@ -36,6 +36,15 @@ app.get("/pokemon", (req, res) => {
   res.send(pokemon);
 });
 
+app.get("/pokemon/search", (req, res) => {
+  console.log(req.query);
+  res.send(
+    pokemon.filter((obj) => {
+      return obj.name.toLowerCase() === req.query.name.toLowerCase();
+    })
+  );
+});
+
 app.get("/pokemon/:indexOfArray", (req, res) => {
   res.send(
     pokemon[req.params.indexOfArray]
