@@ -4,7 +4,7 @@ const app = express();
 const pokemon = require("./models/pokemon.json");
 
 app.get("/", (request, response) => { 
-response.send("Welcome 99 Pokemon!");
+response.send("Welcome 99 Pokemon");
 })
 
 app.get("/bugs", (request, response) => {
