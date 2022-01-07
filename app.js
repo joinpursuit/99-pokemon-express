@@ -13,4 +13,10 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
     response.send("Congratulations on starting a new project called " + verb + "-" + adjective + "-" + noun + "!");
 });
 
+app.get("/bugs", (request, response) => {
+    console.log("GET request received to route: /bugs");
+    const message = "99 little bugs in the code"
+    response.send(`<h1>${message}</h1>`);
+});
+
 module.exports = app;
