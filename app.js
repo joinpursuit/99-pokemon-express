@@ -29,5 +29,16 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
       : "Too many bugs!! Start over!"
   }</a>`);
 });
+app.get("/pokemon", (request, response) => {
+  response.send(pokemon);
+});
+
+app.get("/pokemon/search", (request, response) => {
+  const { name } = request.query;
+  const pokemonName = pokemon.find(
+    (pokemon) => pokemon.name.toLowerCase() === name.toLowerCase()
+  );
+  response.send(pokemonName ? [pokemonName] : []);
+});
 
 module.exports = app;
