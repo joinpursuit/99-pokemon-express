@@ -16,7 +16,7 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
 
 app.get("/bugs", (request, response) => {
   response.send(`<h1>99 little bugs in the code</h1>
-            <a href="101">pull one down, patch it around</a>`);
+            <a href="/bugs/101">pull one down, patch it around</a>`);
 });
 
 app.get("/bugs/:numberOfBugs", (request, response) => {
