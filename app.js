@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const bug = require("./bug");
+const pokemon = require("./models/pokemon.json")
+console.log(pokemon[0])
 
 app.get("/", (req, res) => {
   res.send("Welcome 99 Pokemon");
@@ -30,5 +32,15 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
   }</a>`);
 });
 
+app.get("/pokemon", (req, res) => {
+    res.send(pokemon);
+  });
 
+  app.get("/pokemon/search", (request, response) => {
+    // const { name } = request.query;
+    const poki = pokemon.find(
+      (pokemon) => pokemon.name.toLowerCase() === request.query.name.toLowerCase()
+    );
+    response.send(poki ? [poki] : []);
+  });
 module.exports = app;
