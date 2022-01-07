@@ -12,6 +12,7 @@ app.set('view engine', 'handlebars');
 // https://stackabuse.com/node-js-express-examples-rendered-rest-and-static-websites/
 //https://blog.hubspot.com/website/center-an-image-in-html
 //https://www.npmjs.com/package/express-handlebars
+//https://javascript.plainenglish.io/server-side-image-rendering-with-express-handlebars-cb224187b276
 
 //Not helpful 
 // https://github.com/expressjs/express/issues/3403
