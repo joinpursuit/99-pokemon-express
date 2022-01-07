@@ -10,14 +10,16 @@ app.get("/", (request, response) => {
 
 app.get("/bugs", (request, response) => {
   console.log("get to /bugs");
-  response.send("99 little bugs in the code");
+  response.send(
+    `99 little bugs in the code <a href=${"http://localhost:8888/bugs/101"}>pull one down, patch it around</a>`
+  );
 });
-app.get("/bugs/:numberOfBugs", (request, response) => {
-  console.log(request.params.numberOfBugs);
-  request.params.numberOfBugs > 199
-    ? response.send("Too many bugs!! Start over!")
-    : response.send(`${request.params.numberOfBugs} little bugs in the code`);
-});
+// app.get("/bugs/:numberOfBugs", (request, response) => {
+//   console.log(request.params.numberOfBugs);
+//   request.params.numberOfBugs > 199
+//     ? response.send("Too many bugs!! Start over!")
+//     : response.send(`${request.params.numberOfBugs} little bugs in the code`);
+// });
 
 // app.get("/rocks/:index", (request, response) => {
 //   console.log("get to /rocks");
