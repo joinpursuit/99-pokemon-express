@@ -24,11 +24,26 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
         }`}>Pull one down, patch it around</a>`
       );
 });
+
 app.get("/pokemon", (request, response) => {
   console.log(pokemon);
   response.send(pokemon);
 });
 
+app.get("/pokemon/:indexOfArray", (request, response) => {
+  const { indexOfArray } = request.params;
+  console.log(indexOfArray);
+  pokemon[indexOfArray]
+    ? response.send(pokemon[indexOfArray])
+    : response.send(`Sorry, no pokemon found at ${indexOfArray}`);
+});
+
+// app.get("/pokemon/:indexOfArray", (request, response) => {
+//   console.log(request.query);
+//   const { name } = request.query;
+//   const found = pokemon.find(poke => poke.name > name)
+//   response.send(found);
+// });
 // app.get("/rocks/:index", (request, response) => {
 //   console.log("get to /rocks");
 //   console.log(request.params);
