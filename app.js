@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const pokemon = require("./models/pokemon");
-console.log(pokemon[1]);
+// console.log(pokemon[1]);
 
 app.get("/", (request, response) => {
   console.log("GET request received to route:  /");
@@ -43,14 +43,24 @@ app.get("/pokemon", (request, response) => {
   response.send(pokemon);
 });
 
+app.get("/pokemon/search?", (request, response) =>{
+    const {name} = request.query;
+    if(!pokemon) return []
+    response.send(pokemon.filter(pkmon => pkmon.name.toLowerCase().includes(name.toLowerCase())));
+  })
+ 
+  
 app.get("/pokemon/:indexOfArray", (request, response) => {
   const { indexOfArray } = request.params;
   console.log("GET request received to route:  /pokemon/:indexOfArray");
   if (pokemon[indexOfArray]) {
-    response.send(pokemon[Number(indexOfArray) - 1]);
+    response.send(pokemon[Number(indexOfArray)]);
   } else {
     response.send(`Sorry, no pokemon found at ${indexOfArray}`);
   }
 });
+
+
+
 
 module.exports = app;
