@@ -29,7 +29,7 @@ app.get('/bugs/:numberOfBugs', (request, response) => {
             `)
         } else {
             response.send(
-                `<a href="/bugs">Too many bugs!! Start over!</a>`)
+            `<a href="/bugs">Too many bugs!! Start over!</a>`)
         };
     });
 
