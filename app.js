@@ -4,6 +4,9 @@ const express = require('express');
 // Configuration
 const app = express();
 
+const pokemon = require("./models/pokemon.json");
+// console.log(pokemon[0]);
+
 // Routes
 app.get("/", (req, res)=>{
     res.send("Welcome 99 Pokemon");
@@ -34,6 +37,25 @@ app.get("/bugs/:numberOfBugs", (req, res)=>{
         res.send(`<a href="http://localhost:8888/bugs/">Too many bugs!! Start over!</a>`);
     }
 })
+
+// *** code for Poke-Express ***
+app.get("/pokemon", (req, res)=>{
+    res.json(pokemon);
+})
+
+app.get("/pokemon/:indexOfArray", (req, res)=>{
+    let { indexOfArray } = req.params;
+
+    if (pokemon[indexOfArray]) {
+        res.send(pokemon[`${indexOfArray}`]);
+    } else {
+        res.send(`Sorry, no pokemon found at ${indexOfArray}`)
+    }
+})
+
+
+
+
 
 // Export
 module.exports = app;
