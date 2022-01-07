@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const pokemon = require("./models/pokemon.json");
+const pokemon = require("./models/pokemon");
 console.log(pokemon[1]);
 
 app.get("/", (request, response) => {
@@ -25,7 +25,7 @@ app.get("/bugs", (request, response) => {
 });
 
 app.get("/bugs/:number", (request, response) => {
-    console.log("GET request received to route:  /bugs/:number");
+  console.log("GET request received to route:  /bugs/:number");
   const { number } = request.params;
   if (number < 200) {
     response.send(
@@ -39,11 +39,18 @@ app.get("/bugs/:number", (request, response) => {
 });
 
 app.get("/pokemon", (request, response) => {
-    console.log("GET request received to route:  /pokemon");
+  console.log("GET request received to route:  /pokemon");
   response.send(pokemon);
 });
 
-
-
+app.get("/pokemon/:indexOfArray", (request, response) => {
+  const { indexOfArray } = request.params;
+  console.log("GET request received to route:  /pokemon/:indexOfArray");
+  if (pokemon[indexOfArray]) {
+    response.send(pokemon[Number(indexOfArray) - 1]);
+  } else {
+    response.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
 
 module.exports = app;
