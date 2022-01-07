@@ -8,6 +8,15 @@ const pokemon = require("./models/pokemon");
 app.engine('handlebars', engine.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+//Helpful resources 
+// https://stackabuse.com/node-js-express-examples-rendered-rest-and-static-websites/
+//https://blog.hubspot.com/website/center-an-image-in-html
+//https://www.npmjs.com/package/express-handlebars
+
+//Not helpful 
+// https://github.com/expressjs/express/issues/3403
+
+
 // let pokemonList 
 app.get("/pokemon-pretty", (request, response) => {
   console.log("GET request received to route:  /pokemon-pretty/");
