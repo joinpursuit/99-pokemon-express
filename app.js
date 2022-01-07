@@ -8,6 +8,11 @@ app.get('/', (request, response) => {
     );
 });
 
+app.get('/:verb/:adjective/:noun', (request, response) => {
+    const { verb, adjective, noun } = request.params;
+    response.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+    );
+});
 
 module.exports = app;
 
