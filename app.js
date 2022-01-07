@@ -39,17 +39,27 @@ app.get('/pokemon', (request, response) => {
     response.send(pokemon);
 });
 
-app.get('/pokemon/search/:name', (request, response) => {
+app.get('/pokemon/search', (request, response) => {
     console.log(`GET request received to get route ('/pokemon/search')`);
-    console.log(request.params.name);
-    let pokeName = [];
-        pokemon.find((poke) => {
-            console.log(poke.name);
-        poke.name === `${request.params.name}`
-        return pokeName.push(poke.name);
-        });
-        response.send(poke.name);
+    console.log(request.query.name.toLowerCase());
+    response.send(
+        pokemon.filter((poke) => {
+        return poke.name.toLowerCase() === request.query.name.toLowerCase()
+        })
+     );
 });
+
+// app.get('/pokemon/search/:name', (request, response) => {
+//     console.log(`GET request received to get route ('/pokemon/search')`);
+//     console.log(request.params.name);
+//     let pokeName = [];
+//         pokemon.find((poke) => {
+//             console.log(poke.name);
+//         poke.name === `${request.params.name}`
+//         return pokeName.push(poke.name);
+//         });
+//         response.send(poke.name);
+// });
 
 app.get('/pokemon/:index', (request, response) => {
     console.log(`GET request received to get route: /pokemon/:index`);
