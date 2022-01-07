@@ -1,53 +1,56 @@
 const express = require("express");
-const app = express();
+const peach = express();
 const bug = require("./bug");
 const pokemon = require("./models/pokemon.json")
-console.log(pokemon[0])
+// console.log(pokemon[0])
 
-app.get("/", (req, res) => {
+http://localhost:8888
+peach.get("/", (req, res) => {
   res.send("Welcome 99 Pokemon");
 });
-
-app.get("/:verb/:adjective/:noun", (req, res) => {
+// http://localhost:8888/jumping/joyous/jellybean
+peach.get("/:verb/:adjective/:noun", (req, res) => {
   res.send(
     `Congratulations on starting a new project called ${req.params.verb}-${req.params.adjective}-${req.params.noun}!`
   );
 });
-
-app.get("/bugs", (req, res) => {
+// http://localhost:8888/bugs
+peach.get("/bugs", (req, res) => {
   console.log("Get request received to route: /bugs");
   // res.send(bug[0])
   res.send(`${bug[0]} <a href="/bugs/101">${bug[2]}`);
 });
-
-app.get("/bugs/:numberOfBugs", (request, response) => {
+// http://localhost:8888/bugs/1000
+peach.get("/bugs/:numberOfBugs", (request, response) => {
   const { numberOfBugs } = request.params;
   const numOfBugs = Number(numberOfBugs);
 
   response.send(`<p>${numOfBugs} little bugs in the code</p>
-    <a href="${numOfBugs < 200 ? numOfBugs + 2 : "/"}">${
+    <a href="${numOfBugs < 200 ? numOfBugs + 2 : "/"}">
+    ${
     numOfBugs < 200
       ? `${bug[2]}`
       : `${bug[4]}`
-  }</a>`);
+  }
+  </a>`);
 });
-
-app.get("/pokemon", (req, res) => {
+//  http://localhost:8888/pokemon
+peach.get("/pokemon", (req, res) => {
     res.send(pokemon);
   });
-
-  app.get("/pokemon/search", (request, response) => {
+//   http://localhost:8888/pokemon/search?name=oddish
+  peach.get("/pokemon/search", (request, response) => {
     // const { name } = request.query;
     const poki = pokemon.find(
       (pokemon) => pokemon.name.toLowerCase() === request.query.name.toLowerCase()
     );
     response.send(poki ? [poki] : []);
   });
-
-  app.get("/pokemon/:index", (request, response) => {
+// http://localhost:8888/pokemon/5
+  peach.get("/pokemon/:index", (request, response) => {
     const { index } = request.params;
     response.send(
       pokemon[Number(index)] || "Sorry, no pokemon found at " + index
     );
   });
-module.exports = app;
+module.exports = peach;
