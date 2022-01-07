@@ -24,6 +24,10 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
         }`}>Pull one down, patch it around</a>`
       );
 });
+app.get("/pokemon", (request, response) => {
+  console.log(pokemon);
+  response.send(pokemon);
+});
 
 // app.get("/rocks/:index", (request, response) => {
 //   console.log("get to /rocks");
