@@ -17,7 +17,7 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
 app.get("/bugs", (req, res) => {
   console.log("Get request received to route: /bugs");
   // res.send(bug[0])
-  res.send(`${bug[0]}`);
+  res.send(`${bug[0]} <a href="/bugs/101">${bug[2]}`);
 });
 
 app.get("/bugs/:numberOfBugs", (request, response) => {
@@ -42,5 +42,12 @@ app.get("/pokemon", (req, res) => {
       (pokemon) => pokemon.name.toLowerCase() === request.query.name.toLowerCase()
     );
     response.send(poki ? [poki] : []);
+  });
+
+  app.get("/pokemon/:index", (request, response) => {
+    const { index } = request.params;
+    response.send(
+      pokemon[Number(index)] || "Sorry, no pokemon found at " + index
+    );
   });
 module.exports = app;
