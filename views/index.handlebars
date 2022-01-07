@@ -3,8 +3,11 @@
 <h4 class=".bg-secondary">Pokemon</h4>
 <ul class="list-group .bg-secondary">
   {{#each pokemon}}
-  <li class="list-group-item text-primary .text-dark">Name: {{this.name}}; Image Source: {{this.img}} Type: {{this.type}}</li>
-  {{!-- {{<img src="this.img" alt="pokemon">}} --}}
+  <li class="list-group-item text-primary border border-primary"><img src={{img}}> </li>
+  <li class="list-group-item text-primary border border-secondary .bg-secondary">Name: {{name}}</li>
+  <li class="list-group-item text-primary border border-dark">Type: {{this.type}}</li>
+  <hr/>
+  {{!-- {{<img src=this.img alt="pokemon">}} --}}
   {{/each}}
 </ul>
 

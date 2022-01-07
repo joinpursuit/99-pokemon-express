@@ -5,7 +5,7 @@ const pokemon = require("./models/pokemon");
 // console.log(pokemon[1]);
 
 // // Handlebars Middleware
-app.engine('handlebars', engine.engine());
+app.engine('handlebars', engine.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // let pokemonList 
@@ -15,8 +15,6 @@ app.get("/pokemon-pretty", (request, response) => {
 
 });
 });
-
-
 
 
 app.get("/", (request, response) => {
