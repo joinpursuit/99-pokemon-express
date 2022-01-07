@@ -6,3 +6,6 @@ const app = express();
 app.get("/", (req, res) => {
     res.send("<h1> Server is seding response </h1>");
 });
+
+//export 
+module.exports = app;
