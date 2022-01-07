@@ -1,16 +1,9 @@
 const express = require('express');
 const res = require('express/lib/response');
 const app = express();
-//const pokemon = require('./pokemon.json');
+const pokemon = require('./models/pokemon.json');
 //console.log(pokemon[0]);
 
-app.get('/:verb/:adjective/:noun', (request, response) => {
-    const { verb, adjective, noun } = request.params
-    console.log(`GET request received to get route ('/verb/:adjective/:noun')`);
-    response.send(
-        `Congratulations on starting a new project called ${verb}-${adjective}-${noun}`
-        );
-});
 
 app.get('/', (request, response) => {
     console.log(`GET request received to get route ('/')`);
@@ -41,6 +34,39 @@ app.get('/bugs/:numberOfBugs', (request, response) => {
         } else response.send(`Too many bugs!! Start over!`);
 });
 
+app.get('/pokemon', (request, response) => {
+    console.log(`GET request received to get route ('/pokemon')`);
+    response.send(pokemon);
+});
+
+app.get('/pokemon/search/:name', (request, response) => {
+    console.log(`GET request received to get route ('/pokemon/search')`);
+    console.log(request.params.name);
+    let pokeName = [];
+        pokemon.find((poke) => {
+            console.log(poke.name);
+        poke.name === `${request.params.name}`
+        return pokeName.push(poke.name);
+        });
+        response.send(poke.name);
+});
+
+app.get('/pokemon/:index', (request, response) => {
+    console.log(`GET request received to get route: /pokemon/:index`);
+    if (!pokemon[request.params.index]) {
+        response.send(`Sorry, no pokemon found at ${request.params.index}`)
+    } else { 
+        response.send(pokemon[request.params.index]);
+    }
+});
+
+app.get('/:verb/:adjective/:noun', (request, response) => {
+    const { verb, adjective, noun } = request.params
+    console.log(`GET request received to get route ('/verb/:adjective/:noun')`);
+    response.send(
+        `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+        );
+});
 
 
 //app.get('/pokemon', (request, response) => {
