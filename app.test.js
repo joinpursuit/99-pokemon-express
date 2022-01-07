@@ -20,7 +20,7 @@ describe("app", () => {
     });
   });
 
-  describe("/bugs/:numberOfBugs", () => {
+  describe.only("/bugs/:numberOfBugs", () => {
     it("sends an error link when too many bugs are requested", async () => {
       const response = await request(app).get(`/bugs/200`);
 
