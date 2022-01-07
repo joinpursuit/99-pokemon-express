@@ -16,10 +16,19 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
 app.get("/bugs", (request, response) => {
     console.log("GET request received to route: /bugs");
     const message = "99 little bugs in the code"
-    const linkMessage = "pull one down, patch it around"
+    const linkMessage = "pull one down, patch it around" 
     response.send(`<h1>${message}</h1> 
-    <a href="https://http://localhost:8888/bugs/101">${linkMessage}</a>`);
+    <a href="https://http://localhost:8888/bugs/">${linkMessage}</a>`);
 });
+
+{/* 
+// app.get('/bugs/', (request, response) => {
+//     console.log("GET to /bugs/");
+//     console.log(request.query);
+//     const { num1 } = request.query;
+//     response.send(<a href="https://http://localhost:8888/bugs/">pull one down, patch it around</a>) + (Number(num1) + 2)
+// }); 
+*/}
 
 app.get("/bugs/:numberOfBugs", (request, response) => {
     console.log("GET request received to route: /bugs/:numberOfBugs");
