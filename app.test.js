@@ -67,17 +67,15 @@ describe("app", () => {
 
   describe("/pokemon/:index", () => {
     it("sends a match when the index matches a Pokemon", async () => {
-      
-      const response = await request(app).get("/pokemon/123");
-
-      expect(JSON.parse(response.text)).toEqual(pokemon[123]);
-
-    });
-
-    it("sends a sorry message when no Pokemon is found at the index", async () => {
       const response = await request(app).get("/pokemon/9001");
 
       expect(response.text).toEqual("Sorry, no pokemon found at 9001");
+    });
+
+    it("sends a sorry message when no Pokemon is found at the index", async () => {
+      const response = await request(app).get("/pokemon/123");
+
+      expect(JSON.parse(response.text)).toEqual(pokemon[123]);
     });
   });
 
