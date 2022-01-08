@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require("express");
+const pokemon = require("./models/pokemon.json");
 
 // CONFIGURATION
 const app = express();
@@ -11,7 +12,7 @@ const app = express();
 
 // NEW PROJECT NAME GENERATOR
 app.get("/:verb/:adjective/:noun", (req, res) => {
-  const { verb, adjective, noun } = request.params
+  const { verb, adjective, noun } = req.params
   res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`)
 })
 
@@ -40,16 +41,16 @@ app.get("/pokemon", (req, res) => {
 
 app.get("/pokemon/search", (req, res) => {
   const { name } = req.query
-  res.send(pokemon.filter(pokemon => pokemon.name.toLowerCase() === name.toLowerCase()))
+  res.send(pokemon.filter((pokemon) => pokemon.name.toLowerCase() === name.toLowerCase()))
 })
 
 app.get("/pokemon/:indexOfArray", (req, res) => {
   const { indexOfArray } = req.params
   if (pokemon[indexOfArray]) {
-    res.send(pokemon[indexOfArray])
+    res.send(pokemon[indexOfArray]);
   } else {
-    res.send(`Sorry, no pokemon found at ${[indexOfArray]}`)
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`)
   }
-})
+});
 
 module.exports = app;
