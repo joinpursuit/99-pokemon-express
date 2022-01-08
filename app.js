@@ -52,49 +52,32 @@ app.get(`/pokemon/search`, (req, res)=>{
     // console.log("this is a pokemon name: ", pokemon[0].name.toLowerCase());
     // console.log("this is a pokemon obj: ", pokemon[0]);
 
-    const pokeName = pokemon.find((poke)=>{
-        return poke.name.toUpperCase() === name.toUpperCase();
-        // if (poke.name.toUpperCase() === name.toUpperCase()) {
-        //     // console.log("searched pokemon correct: ", poke.name.toLowerCase())
-        // }
-        // else {
-        //     console.log("did not find in search: ", poke.name.toLowerCase())
-        // }
-    })
-    if (pokeName) {
-        res.json([pokeName]);
-    } else {
-        res.json([]);
-    }
-
-    // ***************************  START: Only works for bulbasaur
-    // let showThisArr = [];
-    // for (let poke of pokemon) {
-    //     // console.log("poke: ", poke); // loops through every pokemon obj
-    //     // console.log("poke: ", poke.name); // loops through every pokemon obj.name
-    //     if (poke.name.toLowerCase() === req.query.name) {
-    //         showThisArr.push(poke)
-    //     } else {
-    //         showThisArr = [];
-    //     }
-    //     res.send(showThisArr);
-    // }
-    // *************************** END: Only works for bulbasaur
-
-    // let count = -1;
-    // for (let pokeIndex of pokemon) {
-    //     count += 1;
-    //     // console.log(count, pokeIndex.name.toLowerCase());
-    // }
-    // console.log("the count is now:", count)
-
-    // if (req.query.name === pokemon[0].name.toLowerCase()) {
-    //     console.log("confused");
-    //     res.json([pokemon[0]]);
+    // const pokeName = pokemon.find((poke)=>{
+    //     return poke.name.toUpperCase() === name.toUpperCase();
+    //     // if (poke.name.toUpperCase() === name.toUpperCase()) {
+    //     //     // console.log("searched pokemon correct: ", poke.name.toLowerCase())
+    //     // }
+    //     // else {
+    //     //     console.log("did not find in search: ", poke.name.toLowerCase())
+    //     // }
+    // })
+    // if (pokeName) {
+    //     res.json([pokeName]);
     // } else {
-    //     console.log("when pokemon isnt found - name is missingno");
     //     res.json([]);
-    // }    
+    // }
+
+    // ***************************  START: This works too
+    let showThisArr = [];
+    for (let poke of pokemon) {
+        // console.log("poke: ", poke); // loops through every pokemon obj
+        // console.log("poke: ", poke.name); // loops through every pokemon obj.name
+        if (poke.name.toLowerCase() === req.query.name.toLowerCase()) {
+            showThisArr.push(poke)
+        }
+    }
+    return res.json(showThisArr);
+    // *************************** END: This works too
 })
 
 app.get("/pokemon/:indexOfArray", (req, res)=>{
