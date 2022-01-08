@@ -28,8 +28,38 @@ const app = express();
 //POKEMON
 const pokemon = require("./models/pokemon.json");
 
-app.get("/pokemon", (req, res) => {
-    res.json(pokemon)
-});
+    app.get("/pokemon", (req, res) => {
+        res.json(pokemon)
+    });
+
+    app.get("/pokemon/search", (req, res) => {
+        const { name } = req.query;
+        const { params } = req.params;
+
+        let searchedPokemon = pokemon.find(pokemonEl => {
+            return pokemonEl.name.toLowerCase() === name.toLowerCase();
+        });
+
+        if(!searchedPokemon){
+            res.send([]);
+        } else {
+            res.send([searchedPokemon]);
+        }
+    });
+
+    app.get("/pokemon/:index", (req, res) => {
+        const { index } = req.params;
+        if(pokemon[index]){
+            res.send(pokemon[index]);
+        } else {
+            res.send(`Sorry, no pokemon found at ${index}`);
+        }
+    });
+
+    //VERB, NOUNS, ADJECTIVES
+    app.get("/:verb/:adjective/:noun", (req, res) => {
+        let { verb, adjective, noun } = req.params;
+        res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`);
+    });
 
 module.exports = app;
