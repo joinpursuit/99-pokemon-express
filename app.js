@@ -43,6 +43,30 @@ app.get("/pokemon", (req, res)=>{
     res.json(pokemon);
 })
 
+app.get(`/pokemon/search`, (req, res)=>{
+    console.log("this is req.params", req.params);
+    console.log("this is req.query", req.query);
+
+    console.log("this is req.query.name", req.query.name);
+    console.log("this is a pokemon name", pokemon[0].name.toLowerCase());
+    // console.log("this is a pokemon obj", pokemon[0]);
+
+    let count = -1;
+    for (let pokeIndex of pokemon) {
+        count += 1;
+        // console.log(count, pokeIndex.name.toLowerCase());
+    }
+    console.log("the count is now:", count)
+
+    if (req.query.name === pokemon[0].name.toLowerCase()) {
+        console.log("confused");
+        res.json([pokemon[0]]);
+    } else {
+        console.log("when pokemon isnt found - name is missingno");
+        res.json([]);
+    }    
+})
+
 app.get("/pokemon/:indexOfArray", (req, res)=>{
     let { indexOfArray } = req.params;
 
