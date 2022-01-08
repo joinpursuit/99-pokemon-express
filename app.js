@@ -45,9 +45,12 @@ app.get("/pokemon", (req, res) => {
 });
 
 // sending a empty array when the pokemon isnt found ..
-app.get("/pokemon/:search", (req, res) => {
-	let { search } = req.params;
-	pokemon.find((e) => (e === e.name ? res.json(e) : res.send([])));
+app.get("/pokemon/search", (req, res) => {
+	const { search } = req.params;
+	const { name } = req.query;
+	pokemon.find((e) =>
+		e.name.toLowerCase() === name.toLowerCase() ? res.json([e]) : res.send([])
+	);
 });
 
 // getting the pokemon depending on its index
@@ -60,8 +63,4 @@ app.get("/pokemon/:index", (req, res) => {
 	}
 });
 
-console.log(pokemon[0]);
-
 module.exports = app;
-
-// res.send("Your solution is " + (Number(num1) + Number(num2)));
