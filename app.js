@@ -46,12 +46,6 @@ app.get("/pokemon", (req, res)=>{
 
 app.get(`/pokemon/search`, (req, res)=>{
     const { name } = req.query;
-    // console.log("this is req.params: ", req.params);
-    // console.log("this is req.query: ", req.query);
-    // console.log("this is req.query.name: ", req.query.name);
-    // console.log("this is a pokemon name: ", pokemon[0].name.toLowerCase());
-    // console.log("this is a pokemon obj: ", pokemon[0]);
-
     // ***************************  START-OPTION 1: Passes all tests #1
     const pokeName = pokemon.find((poke)=>{
         return poke.name.toUpperCase() === name.toUpperCase();
@@ -83,10 +77,6 @@ app.get("/pokemon/:indexOfArray", (req, res)=>{
         res.send(`Sorry, no pokemon found at ${indexOfArray}`)
     }
 })
-
-
-
-
 
 // Export
 module.exports = app;
