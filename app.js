@@ -25,18 +25,26 @@ app.get("/bugs", (req, res) => {
 	// res.send(`<a href="/bugs/101">pull one down</a>`);
 });
 
+// still having some problem with understanding i guess ...
 // tryna get the number to show up.
-app.get("/bugs/:numberOfBugs"),
-	(req, res) => {
-		let { numberOfBugs } = req.params;
-		if (numberOfBugs >= 200) {
-			res.send(` <a href="/">Too many bugs!! Start over</a>`);
-			return;
-		}
-		res.send(numberOfBugs + 2);
-
-		// res.send(String(numberOfBugs) + "little bugs in the code");
-	};
+app.get("/bugs/:numberOfBugs", (req, res) => {
+	const { numberOfBugs } = req.params;
+	const answer = Number(numberOfBugs);
+	res.send(`${answer} little bugs in the code
+	<a href=${answer < 200 ? answer + 2 : "/bugs"}>
+	${
+		answer < 200
+			? "Pull one down, patch it around"
+			: "Too many bugs!! Start over!"
+	}</a>`);
+	// if (numberOfBugs >= 200) {
+	// 	res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`);
+	// 	return;
+	// }
+	// res.send(
+	// 	` <a href="${answer}">pull one down, patch it around</a><h1>${numberOfBugs} little bugs in the code </h1>`
+	// );
+});
 
 // The pokemon app
 
@@ -46,21 +54,18 @@ app.get("/pokemon", (req, res) => {
 
 // sending a empty array when the pokemon isnt found ..
 app.get("/pokemon/search", (req, res) => {
-	const { search } = req.params;
 	const { name } = req.query;
 	pokemon.find((e) =>
-		e.name.toLowerCase() === name.toLowerCase() ? res.json([e]) : res.send([])
+		e.name.toLowerCase() === name.toLowerCase() ? res.json([e]) : res.json([])
 	);
 });
 
 // getting the pokemon depending on its index
 app.get("/pokemon/:index", (req, res) => {
 	let { index } = req.params;
-	if (pokemon[index]) {
-		res.send(pokemon[req.params.index]);
-	} else {
-		res.send(`Sorry, no pokemon found at ${index}`);
-	}
+	pokemon[index]
+		? res.send(pokemon[req.params.index])
+		: res.send(`Sorry, no pokemon found at ${index}`);
 });
 
 module.exports = app;
