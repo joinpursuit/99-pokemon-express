@@ -46,15 +46,28 @@ app.get("/pokemon", (req, res)=>{
 
 app.get(`/pokemon/search`, (req, res)=>{
     const { name } = req.query;
-    console.log("this is req.params: ", req.params);
-    console.log("this is req.query: ", req.query);
-    console.log("this is req.query.name: ", req.query.name);
-    console.log("this is a pokemon name: ", pokemon[0].name.toLowerCase());
+    // console.log("this is req.params: ", req.params);
+    // console.log("this is req.query: ", req.query);
+    // console.log("this is req.query.name: ", req.query.name);
+    // console.log("this is a pokemon name: ", pokemon[0].name.toLowerCase());
     // console.log("this is a pokemon obj: ", pokemon[0]);
 
-    
+    const pokeName = pokemon.find((poke)=>{
+        return poke.name.toUpperCase() === name.toUpperCase();
+        // if (poke.name.toUpperCase() === name.toUpperCase()) {
+        //     // console.log("searched pokemon correct: ", poke.name.toLowerCase())
+        // }
+        // else {
+        //     console.log("did not find in search: ", poke.name.toLowerCase())
+        // }
+    })
+    if (pokeName) {
+        res.json([pokeName]);
+    } else {
+        res.json([]);
+    }
 
-    // ***************************  START: Only works for bulbasaur vvv
+    // ***************************  START: Only works for bulbasaur
     // let showThisArr = [];
     // for (let poke of pokemon) {
     //     // console.log("poke: ", poke); // loops through every pokemon obj
@@ -66,9 +79,7 @@ app.get(`/pokemon/search`, (req, res)=>{
     //     }
     //     res.send(showThisArr);
     // }
-    // *************************** END: Only works for bulbasaur ^^^
-
-    pokemon
+    // *************************** END: Only works for bulbasaur
 
     // let count = -1;
     // for (let pokeIndex of pokemon) {
