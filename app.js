@@ -52,32 +52,26 @@ app.get(`/pokemon/search`, (req, res)=>{
     // console.log("this is a pokemon name: ", pokemon[0].name.toLowerCase());
     // console.log("this is a pokemon obj: ", pokemon[0]);
 
-    // const pokeName = pokemon.find((poke)=>{
-    //     return poke.name.toUpperCase() === name.toUpperCase();
-    //     // if (poke.name.toUpperCase() === name.toUpperCase()) {
-    //     //     // console.log("searched pokemon correct: ", poke.name.toLowerCase())
-    //     // }
-    //     // else {
-    //     //     console.log("did not find in search: ", poke.name.toLowerCase())
-    //     // }
-    // })
-    // if (pokeName) {
-    //     res.json([pokeName]);
-    // } else {
-    //     res.json([]);
-    // }
-
-    // ***************************  START: This works too
-    let showThisArr = [];
-    for (let poke of pokemon) {
-        // console.log("poke: ", poke); // loops through every pokemon obj
-        // console.log("poke: ", poke.name); // loops through every pokemon obj.name
-        if (poke.name.toLowerCase() === req.query.name.toLowerCase()) {
-            showThisArr.push(poke)
-        }
+    // ***************************  START-OPTION 1: Passes all tests #1
+    const pokeName = pokemon.find((poke)=>{
+        return poke.name.toUpperCase() === name.toUpperCase();
+    })
+    if (pokeName) {
+        res.json([pokeName]);
+    } else {
+        res.json([]);
     }
-    return res.json(showThisArr);
-    // *************************** END: This works too
+    // *************************** END-OPTION 1: Passes all tests #1
+
+    // ***************************  START-OPTION 2: Passes all tests #2
+    // let showThisArr = [];
+    // for (let poke of pokemon) {
+    //     if (poke.name.toLowerCase() === req.query.name.toLowerCase()) {
+    //         showThisArr.push(poke)
+    //     }
+    // }
+    // return res.json(showThisArr);
+    // *************************** END-OPTION 2: Passes all tests #2
 })
 
 app.get("/pokemon/:indexOfArray", (req, res)=>{
