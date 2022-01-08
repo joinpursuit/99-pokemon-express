@@ -35,7 +35,7 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
 
 // POKE-EXPRESS
 app.get("/pokemon", (req, res) => {
-  res.send(pokeman)
+  res.send(pokemon)
 });
 
 app.get("/pokemon/search", (req, res) => {
