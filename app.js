@@ -24,4 +24,12 @@ const app = express();
         `)
     });
 
+
+//POKEMON
+const pokemon = require("./models/pokemon.json");
+
+app.get("/pokemon", (req, res) => {
+    res.json(pokemon)
+});
+
 module.exports = app;
