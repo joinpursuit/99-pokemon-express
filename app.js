@@ -8,6 +8,10 @@ app.get("/:verb/:adjective/:noun", (request, response) => {
 })
 
 // 99 Little Bugs In The Code
+app.get("/", (request, response) => {
+    response.send("Welcome 99 Pokemon")
+})
+
 app.get("/bugs", (request, response) => {
     response.send("99 little bugs in the code<br/>99 little bugs<br/><a href='/bugs/101'>pull one down,<br/>patch it around</a>")
 })
