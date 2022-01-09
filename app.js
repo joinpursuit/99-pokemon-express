@@ -27,4 +27,8 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
 // Poke-Express
 console.log(pokemon[0])
 
+app.get("/pokemon", (request, response) => {
+    response.send(pokemon)
+})
+
 module.exports = app
