@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const pokemon = require("./models/pokemon.json")
 
 // New Project Name Generator
 app.get("/:verb/:adjective/:noun", (request, response) => {
@@ -24,5 +25,6 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
 })
 
 // Poke-Express
+console.log(pokemon[0])
 
 module.exports = app
