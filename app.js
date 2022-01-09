@@ -31,4 +31,11 @@ app.get("/pokemon", (request, response) => {
     response.send(pokemon)
 })
 
+app.get("/pokemon/:indexOfArray", (request, response) => {
+    const { indexOfArray } = request.params
+    !pokemon[indexOfArray]
+    ? response.send(`Sorry, no pokemon found at ${indexOfArray}`)
+    : response.send(pokemon[indexOfArray])
+})
+
 module.exports = app
