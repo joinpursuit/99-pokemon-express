@@ -20,7 +20,7 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
     const { numberOfBugs } = request.params
     numberOfBugs >= 200 
     ? response.send("<a href='/'>Too many bugs!! Start over!</a>")
-    :response.send(`${numberOfBugs} little bugs in the code<br/><a href="/bugs/${Number(numberOfBugs)+Number(2)}">pull one down,<br/>patch it around</a>`)
+    :response.send(`${numberOfBugs} little bugs in the code<br/><a href="http://localhost:8888/bugs/${Number(numberOfBugs)+Number(2)}">Pull one down, patch it around</a>`)
 })
 
 module.exports = app
