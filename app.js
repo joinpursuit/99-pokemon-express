@@ -1,6 +1,6 @@
-const e = require("express");
+// const e = require("express");
 const express = require("express");
-const res = require("express/lib/response");
+// const res = require("express/lib/response");
 // calling express
 const app = express();
 const pokemon = require("./models/pokemon.json");
@@ -30,24 +30,24 @@ app.get("/bugs", (req, res) => {
 app.get("/bugs/:numberOfBugs", (req, res) => {
 	const { numberOfBugs } = req.params;
 	const answer = Number(numberOfBugs);
-	res.send(`${answer} little bugs in the code
-	<a href=${answer < 200 ? answer + 2 : "/bugs"}>
-	${
-		answer < 200
-			? "Pull one down, patch it around"
-			: "Too many bugs!! Start over!"
-	}</a>`);
-	// if (numberOfBugs >= 200) {
-	// 	res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`);
-	// 	return;
-	// }
-	// res.send(
-	// 	` <a href="${answer}">pull one down, patch it around</a><h1>${numberOfBugs} little bugs in the code </h1>`
-	// );
+	const total = String(Number(numberOfBugs) + 2);
+	// res.send(`${answer} little bugs in the code
+	// <a href= ${total ? answer + 2 : "/bugs"}">
+	// ${
+	// 	answer < 200
+	// 		? "Pull one down, patch it around"
+	// 		: "Too many bugs!! Start over!"
+	// }</a>`);
+	if (numberOfBugs >= 200) {
+		res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`);
+		return;
+	}
+	res.send(
+		`<h1>${numberOfBugs} little bugs in the code </h1> <a href="/bugs/${total}">Pull one down, patch it around</a>`
+	);
 });
 
 // The pokemon app
-
 app.get("/pokemon", (req, res) => {
 	res.send(pokemon);
 });
