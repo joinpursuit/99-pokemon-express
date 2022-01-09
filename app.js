@@ -25,19 +25,11 @@ app.get("/bugs", (req, res) => {
 	// res.send(`<a href="/bugs/101">pull one down</a>`);
 });
 
-// still having some problem with understanding i guess ...
 // tryna get the number to show up.
 app.get("/bugs/:numberOfBugs", (req, res) => {
 	const { numberOfBugs } = req.params;
 	const answer = Number(numberOfBugs);
 	const total = String(Number(numberOfBugs) + 2);
-	// res.send(`${answer} little bugs in the code
-	// <a href= ${total ? answer + 2 : "/bugs"}">
-	// ${
-	// 	answer < 200
-	// 		? "Pull one down, patch it around"
-	// 		: "Too many bugs!! Start over!"
-	// }</a>`);
 	if (numberOfBugs >= 200) {
 		res.send(`<a href="/bugs">Too many bugs!! Start over!</a>`);
 		return;
