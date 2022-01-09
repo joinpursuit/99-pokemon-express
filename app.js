@@ -12,4 +12,9 @@ app.get("/bugs", (request, response) => {
     response.send("99 little bugs in the code<br/>99 little bugs<br/><a href='/bugs/101'>pull one down,<br/>patch it around</a>")
 })
 
+app.get("/bugs/:numberOfBugs", (request, response) => {
+    const { numberOfBugs } = request.params
+    response.send(`${numberOfBugs} little bugs in the code<br/><a href="/bugs/${Number(numberOfBugs)+Number(2)}">pull one down,<br/>patch it around</a>`)
+})
+
 module.exports = app
