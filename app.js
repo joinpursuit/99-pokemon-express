@@ -11,31 +11,33 @@ const app = express();
 // ROUTES
 app.get("/:verb/:adjective/:noun", (req, res) => {
   const { verb, adjective, noun } = req.params;
-  res.status(200)
-    .send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!
-    `);
+  res
+    .status(200)
+    .send(
+      `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+    );
 });
 
 // 99 Little Bugs In the Code
 app.get("/bugs/:numberOfBugs", (req, res) => {
   const { numberOfBugs } = req.params;
-  if (Number(numberOfBugs) > 200) {
+  if (Number(numberOfBugs) >= 200) {
     res.send(
-      '<h1><a href="http://localhost:8888/bugs/">pull one down</a></h1>'
+      '<div>Too many bugs!! Start over!<h1><a href="http://localhost:8888/bugs/">pull one down</a></h1></div>'
     );
     return;
   } else {
     res.send(
       `<h1>${numberOfBugs} little bugs in the code</h1><a href='http://localhost:8888/bugs/${
         Number(numberOfBugs) + 2
-      }'>pull one down, patch it around</a>`
+      }'>Pull one down, patch it around</a>`
     );
   }
 });
 
-app.get("/bugs/", (req, res) => {
+app.get("/bugs", (req, res) => {
   res.send(
-    "<h1>99 litte bugs in the code</h1><a href='http://localhost:8888/bugs/101'>pull one down, patch it around</a>"
+    "<h1>99 little bugs in the code</h1><a href='http://localhost:8888/bugs/101'>pull one down, patch it around</a>"
   );
 });
 
@@ -84,10 +86,14 @@ app.get("/pokemon", (req, res) => {
 app.get("/pokemon/:indexOfArray", (req, res) => {
   const { indexOfArray } = req.params;
   if (indexOfArray > 150) {
-    res.send(`<h1>sorry, no pokemon found at /pokemon${indexOfArray}</h1>`);
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
   } else {
     res.send(pokemon[indexOfArray]);
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("Welcome 99 Pokemon");
 });
 
 // EXPORT
