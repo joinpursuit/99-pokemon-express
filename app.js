@@ -40,12 +40,54 @@ app.get("/bugs/", (req, res) => {
 });
 
 // POKE-EXPRESS
-// app.get("/pokemon", (req, res) => {
-//   res.send();
-// });
+app.get("/pokemon-pretty/:indexArray", (req, res) => {
+  const { indexArray } = req.params;
+
+  let pokeArray = pokemon.filter((item, index) => {
+    return Number(indexArray) === index;
+  });
+
+  res.send(
+    `<div><div>${pokeArray[0].name}</div><div><img src="${pokeArray[0].img}"/></div><div>${pokeArray[0].misc.classification}</div></div>`
+  );
+});
+
+app.get("/pokemon-pretty", (req, res) => {
+  let pokeArrayList = pokemon.map((item, index) => {
+    return `<li><a href="http://localhost:8888/pokemon-pretty/${index}">${item.name}</a></li>`;
+  });
+  res.send(
+    `<div>
+      <ul>${pokeArrayList.join(" ")}</ul>
+    </div>`
+  );
+});
+
+app.get("/pokemon/search", (req, res) => {
+  const { name } = req.query;
+
+  let searchPokemon = pokemon.filter((item) => {
+    return item.name.toLowerCase() === name.toLowerCase();
+  });
+
+  if (searchPokemon) {
+    res.send(searchPokemon);
+  } else {
+    res.send(`<h1>${name} Not Found Try Again</h1>`);
+  }
+});
 
 app.get("/pokemon", (req, res) => {
   res.send(pokemon);
+});
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (indexOfArray > 150) {
+    res.send(`<h1>sorry, no pokemon found at /pokemon${indexOfArray}</h1>`);
+  } else {
+    res.send(pokemon[indexOfArray]);
+  }
 });
 
 // EXPORT
