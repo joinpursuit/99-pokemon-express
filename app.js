@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express()
 
-const pokemon = require("./models/pokemon.json")
+const pokemonArr = require("./models/pokemon.json")
 
 app.get("/", (req,res)=>{
     res.send("Welcome 99 Pokemon")
@@ -18,13 +18,17 @@ app.get("/bugs", (req,res)=>{
 });
 
 app.get("/pokemon", (req, res)=>{
-    res.send(pokemon)
+    res.send(pokemonArr)
 })
 
 app.get("/pokemon/search", (req,res)=>{
     const { name } = req.query
-    if(pokemon.name === name){
-        res.send(pokemon)
+
+    const pokemonName = pokemonArr.find((pokemon)=>{
+        return pokemon.name.toLowerCase() === name.toLowerCase();
+    })
+    if(pokemonName){
+        res.send([pokemonName])
         return;
     }
     res.send([])
@@ -33,8 +37,8 @@ app.get("/pokemon/search", (req,res)=>{
 
 app.get("/pokemon/:index", (req, res)=>{
     let { index } = req.params
-    if (pokemon[index]){
-        res.send(pokemon[index])
+    if (pokemonArr[index]){
+        res.send(pokemonArr[index])
     }else{
         res.send(`Sorry, no pokemon found at ${index}`)
     }
