@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const pokemon = require("./models/pokemon.json")
+console.log(pokemon.length)
 
 app.get('/bugs', (request,response) => {
     response.send(
@@ -27,5 +29,18 @@ app.get('/bugs/:numberOfBugs', (request,response) => {
             `
         )
     } 
+})
 
+app.get('/pokemon',(request,response) => {
+    response.send(pokemon)
+})
+
+app.get('/pokemon/:indexOfArray', (request,response) => {
+    const {indexOfArray} = request.params;
+    if (indexOfArray > 151) {
+        response.send(`Sorry, no pokemon found at /pokemon/${indexOfArray}`)
+    }
+    response.send(
+        pokemon[indexOfArray]
+    )
 })
