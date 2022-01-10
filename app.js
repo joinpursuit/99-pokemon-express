@@ -50,16 +50,12 @@ app.get("/pokemon/:index", (req, res)=>{
 app.get("/bugs/:numberOfBugs", (req, res)=>{
     const { numberOfBugs} = req.params
     if (numberOfBugs >= 200){
-        res.send(`Too many bugs!! Start over!! <a href='/'Start over!!</a>`)
+        res.send(`Too many bugs!! Start over!! <a href='/bugs'Start over!!</a>`)
     }else{
         res.send(`
-        <div>
         ${Number(numberOfBugs)} little bugs in the code
         <a href='/bugs/${Number(numberOfBugs) + 2}'>Pull one down, patch it around</a>
-        </div>
-        `
-        
-        )
+        `)
     }
 })
 
