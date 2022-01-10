@@ -48,6 +48,7 @@ app.get("/pokemon/search", (req, res) => {
     }
 })
 
+
 app.get("/pokemon/:indexOfArray",(req, res) => {
     const { indexOfArray } = req.params;
     if(pokemon[indexOfArray]) {
@@ -56,6 +57,34 @@ app.get("/pokemon/:indexOfArray",(req, res) => {
         res.send(`Sorry, no pokemon found at ${indexOfArray}`)
     }
 })
+
+
+app.get("/pokemon-pretty", (req, res) => {
+    let pokemonList = pokemon.map((obj, index) => {
+        return (`
+             <li>
+                 <a href="http://localhost:8888/pokemon-pretty/${index}">${obj.name}</a>
+             </li>
+        `)
+    })
+    res.send(`
+         <ul>${pokemonList.join(" ")}</ul>
+    `)
+   });
+
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+    const { indexOfArray } = req.params;
+    for(let i=0; i<= pokemon.length; i++) {
+        if(Number(indexOfArray) === i ) {
+            res.send(`
+            <h1>Name: ${pokemon[i].name}</h1>
+            <h2>Classification: ${pokemon[i].misc.classification}</h2>
+            <img src= ${pokemon[i].img} alt="pokemon-image" width=100px/>
+        `) 
+        }
+    }
+})
+
 
 
 
