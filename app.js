@@ -1,6 +1,4 @@
 const express = require("express");
-const req = require("express/lib/request");
-const res = require("express/lib/response");
 const app = express();
 const pokemon = require("./models/pokemon.json")
 
@@ -40,6 +38,13 @@ app.get('/pokemon',(request,response) => {
     response.send(pokemon)
 })
 
+app.get('/pokemon/search',(request, response) => {
+    const {name} = request.query;
+    const foundPokemon = pokemon.find(eachPokemon => eachPokemon.name.toLowerCase() === name.toLowerCase())
+    // const result = foundPokemon === undefined ? [] : [foundPokemon] 
+    response.send(foundPokemon === undefined ? [] : [foundPokemon])
+})
+
 app.get('/pokemon/:indexOfArray', (request,response) => {
     const {indexOfArray} = request.params;
     if (indexOfArray > 151) {
@@ -50,13 +55,6 @@ app.get('/pokemon/:indexOfArray', (request,response) => {
     )
 })
 
-
-// app.get('/pokemon/search/:userInput',(request, response) => {
-//     const {userInput} = request.params;
-//     const foundPokemon = pokemon.find(eachPokemon => eachPokemon.name.toLowerCase() === userInput.toLowerCase())
-//     // const parsedPokemon = JSON.parse(foundPokemon)
-//     response.send([foundPokemon])
-// })
 
 app.get('/:verb/:adjective/:noun', (request,response) => {
     const {verb,adjective,noun} = request.params
