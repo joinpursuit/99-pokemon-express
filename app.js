@@ -7,7 +7,7 @@ const pokemon = require("./models/pokemon.js")
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send("Welcome to Pokemon Express!");
+    res.send("Welcome 99 Pokemon");
 });
 
 app.get("/pokemon", (req, res) => {
