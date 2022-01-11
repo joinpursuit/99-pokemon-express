@@ -2,6 +2,7 @@ const express = require("express");
 console.log(express)
 
 const pokemon = require("./models/pokemon.js")
+console.log(pokemon[1]);
 
 
 const app = express();
@@ -23,5 +24,13 @@ app.get("/bugs", (req, res) => {
 app.get("/pokemon", (req, res) => {
     res.send(pokemon);
 })
+
+app.get("/pokemon/search", (req, res) => {
+    res.send(
+        pokemon.filter((pokeObj) => {
+            return pokeObj.name.toLowerCase() === this.request.query.name.toLowerCase()
+        })
+    );
+});
 
 module.exports = app;
