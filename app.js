@@ -23,7 +23,31 @@ app.get("/bugs/:nbr", (req, res) => {
 app.get("/pokemon", (req, res) => {
   res.send(pokemon);
 });
-///pokemon/search
+//pokemon-pretty
+app.get("/pokemon-pretty", (req, res) => {
+  const pokemonHtml = pokemon.map(
+    (poke) =>
+      `<li>
+      <a href=${poke.url}>
+        <h3>${poke.name}</h3>
+      </a>
+    </li>`
+  );
+  res.send(`<ol>${pokemonHtml}</ol>`);
+});
+//pokemon-pretty/:indexOfArray
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (Number(indexOfArray) >= 99 || Number(indexOfArray) < 0)
+    res.send(`sorry, no pokemon found at /pokemon[${indexOfArray}]`);
+  else {
+    const poke = pokemon[indexOfArray];
+    res.send(`<a href=${poke.url}>
+                <h3>${poke.name}</h3>
+              </a>`);
+  }
+});
+//pokemon/search
 app.get("/pokemon/search", (req, res) => {
   const { name } = req.query;
   const pokeFound = pokemon.find((poke) => poke.name === name);
