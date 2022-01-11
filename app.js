@@ -12,18 +12,14 @@ app.get("/bugs", (req, res) => {
 
 app.get("/bugs/:nbr", (req, res) => {
   const { nbr } = req.params;
-  if (Number(nbr) >= 200)
+  const plu2 = Number(nbr) + 2;
+  if (nbr >= 200) {
+    res.send(`<a href=/bugs>Too many bugs!! Start over!</a>`);
+  } else {
     res.send(
-      `<a href=http://localhost:8888/bugs>Too many bugs!! Start over!</a>`
+      `${nbr} little bugs in the code <a href=/bugs/${plu2}>Pull one down, patch it around.</a>`
     );
-  else
-    res.send(
-      `${Number(
-        nbr
-      )} little bugs in the code <br><a href=http://localhost:8888/bugs/${
-        Number(nbr) + 2
-      }>pull one down, patch it around</a>`
-    );
+  }
 });
 app.get("/pokemon", (req, res) => {
   res.send(pokemon);
