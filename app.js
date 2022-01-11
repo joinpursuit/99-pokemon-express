@@ -31,25 +31,24 @@ app.get("/pokemon", (req, res) => {
   res.send(pokemon);
 });
 
-
 app.get("/pokemon/search", (req, res) => {
-    const { name } = req.query;
-    const pokemonMatch = pokemon.filter(
-        (el) => el.name.toLowerCase() === name.toLowerCase()
-        );
-        if (pokemonMatch.length > 0) res.send(pokemonMatch);
-        else res.send([]);
-    });
-    
-    app.get('/pokemon/:indexOfArray', (req, res) => {
-        const { indexOfArray } = req.params
-        if(pokemon[indexOfArray]) {
-            res.send(pokemon[indexOfArray])
-        } else {
-            res.send(`Sorry, no pokemon found at ${indexOfArray}`)
-        }
-    })
-    
+  const { name } = req.query;
+  const pokemonMatch = pokemon.filter(
+    (el) => el.name.toLowerCase() === name.toLowerCase()
+  );
+  if (pokemonMatch.length > 0) res.send(pokemonMatch);
+  else res.send([]);
+});
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (pokemon[indexOfArray]) {
+    res.send(pokemon[indexOfArray]);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
+
 app.get("/:verb/:adjective/:noun", (req, res) => {
   const { verb, adjective, noun } = req.params;
   res.send(
