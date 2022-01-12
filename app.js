@@ -7,8 +7,8 @@ console.log(pokemon[1]);
 
 const app = express();
 
-app.get("/:verb/:noun/:adjective", (request, response) => {
-    const { verb, noun, adjective } = request.params;
+app.get("/:verb/:noun/:adjective", (req, response) => {
+    const { verb, noun, adjective } = req.params;
     response.send(
         `Congratulations on starting a new project called ${verb}-${noun}-${adjective}`
     );
@@ -33,18 +33,18 @@ app.get("/pokemon", (req, res) => {
 })
 
 app.get("/pokemon/:indexOfArray", (req, res) => { //request parameter 
-    const { pokeIndex } = request.params; // Object to request pokemon at index
+    const { pokeIndex } = req.params; // Object to request pokemon at index
     if (!pokemon[pokeIndex]) {
-        this.response.send(`Sorry, no pokemon found at ${pokeIndex}`);
+        res.send(`Sorry, no pokemon found at ${pokeIndex}`);
     } else {
-        response.send(pokemon[pokeIndex]);
+        res.send(pokemon[pokeIndex]);
     }
 });
 
 app.get("/pokemon/search", (req, res) => {
     res.send(
         pokemon.filter((pokeObj) => {
-            return pokeObj.name.toLowerCase() === this.request.query.name.toLowerCase() //if pokeObj name is equal to the query 
+            return pokeObj.name.toLowerCase() === request.query.name.toLowerCase();
         })
     );
 });
