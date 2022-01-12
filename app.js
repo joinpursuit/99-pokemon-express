@@ -1,6 +1,5 @@
 // DEPENDENCIES
 const express = require("express");
-const res = require("express/lib/response");
 const pokemon = require("./models/pokemon.json");
 const app = express();
 
@@ -18,13 +17,13 @@ app.get("/bugs", (req, res) => {
 app.get("/bugs/:numberOfBugs", (req, res) => {
   const { numberOfBugs } = req.params;
   if (numberOfBugs >= 200) {
-    res.send("Too many bugs!! Start over!");
-  } else {
-    res.send(`<p>${numberOfBugs} little bugs in the code</p>
-              <a href="/bugs/${
-                Number(numberOfBugs) + 2
-              }">pull one down, patch it around</a>`);
-  }
+      res.send("Too many bugs!! Start over!");
+    } else {
+        res.send(`<p>${numberOfBugs} little bugs in the code</p>
+        <a href="/bugs/${
+            Number(numberOfBugs) + 2
+        }">Pull one down, patch it around</a>`);
+    }
 });
 
 app.get("/pokemon", (req, res) => {
