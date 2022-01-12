@@ -1,4 +1,6 @@
+const { response } = require("express");
 const express = require("express");
+const { download } = require("express/lib/response");
 
 
 const pokemon = require("./models/pokemon.js")
@@ -13,6 +15,21 @@ app.get("/:verb/:noun/:adjective", (req, response) => {
         `Congratulations on starting a new project called ${verb}-${noun}-${adjective}`
     );
 });
+
+
+app.get("/bugs/:numberOfBugs", (req, res) => {
+    const {numberOfBugs} = req.params;
+    if (numberOfBugs < 200) {
+        res.send(
+            `${numberOfBugs} litte bugs in the code` + `<a href = '/bugs/101 ${Number(numberOfBugs) + 2}'> Pull one down, patch it around</a>`
+        )
+    } else if (numberOfBugs < 200) {
+        res.send(
+            `${numberOfBugs} litte bugs in the code` 
+        );
+    }
+    else response.send(`Too many bugs!! Start over!`);
+})
 
 app.get("/", (req, res) => {
     res.send("Welcome 99 Pokemon");
