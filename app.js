@@ -10,41 +10,24 @@ app.get("/", (req, res) => {
 // ~new project name generator
 app.get("/:verb/:adjective/:noun", (req, res) => {
     const { verb, adjective, noun } = req.params;
-    if( verb && adjective && noun ) {
-        res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`); 
-    } else {
-        res.send(`No new project defined in the form of verb-adjective-noun`);
-    }
+    res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`); 
 });
 
-// On the home page (get "/bugs"), users should see:
-// "99 little bugs in the code"
-// a link that says "pull one down, patch it around"
-// this should link to /bugs/101, where the number represents the number of bugs remaining to fix
-// When a number is given in the url (get "/bugs/:numberOfBugs"), users should see:
-// The number of bugs left in the code (i.e. 101 little bugs in the code);
-
-
-// a link to "pull one down, patch it around", where the href is number of bottles in the parameter plus 2
-// If there over 200 bugs left, do not show a link to "pull one down", rather, add a link to start over, which directs the user back to the home page
-// Hint: You should use an anchor tag with an href to link to the next 'page'
-
+//~bugs
 app.get("/bugs", (req, res) => {
-    res.send("<h3>99 little bugs in the code <a href='/localhost:8888/bugs/101'>pull one down, patch it around</a></h3>");
+    res.send("<h1>99 little bugs in the code </h1> <a href='http://localhost:8888/bugs/101'>pull one down, patch it around</a>");
 });
 
 app.get("/bugs/:numberOfBugs", (req, res) => {
     const { numberOfBugs } = req.params;
-    const { x, y } = req.query;
-    console.log(numberOfBugs, "this is the request params");
-    console.log(x,y, "these are the query strings");
 
-    if( numberOfBugs <  200 ) {
-        res.send(`${numberOfBugs} in the code`)
+    if( Number(numberOfBugs) >=  200 ) {
+        res.send(`'<div>Too many bugs!! Start over!<h1><a href="http://localhost:8888/bugs/">pull one down</a></h1></div>'`);
+        return;
     } else {
-
+        res.send(`<h1>${numberOfBugs} little bugs in the code</h1><a href="http://localhost:8888/bugs/${Number(numberOfBugs)+2}">Pull one down, patch it around</a>`);
     }
-})
+});
 
 
 module.exports = app;
