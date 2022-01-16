@@ -21,7 +21,7 @@ app.get("/bugs", (req, res) => {
 app.get("/bugs/:numberOfBugs", (req, res) => {
     const { numberOfBugs } = req.params;
 
-    if( Number(numberOfBugs) >=  200 ) {
+    if(Number(numberOfBugs) >=  200 ) {
         res.send(`'<div>Too many bugs!! Start over!<h1><a href="http://localhost:8888/bugs/">pull one down</a></h1></div>'`);
         return;
     } else {
@@ -29,5 +29,35 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
     }
 });
 
+//~Pokemon
+const pokemonArray = require("./models/pokemon.json");
+
+app.get("/pokemon", (req, res) => {
+    res.send(pokemonArray);
+});
+
+app.get("/pokemon/search", (req, res) => {
+    const { name } = req.query;
+    let response = [];
+    let searchedPokemon = pokemonArray.find((pokemon) => {
+        return pokemon.name.toLowerCase() === name.toLowerCase();
+    });
+    if( !searchedPokemon ) {
+        res.json(response);
+    } else {
+        response.push(searchedPokemon);
+        res.json(response);
+    }
+});
+
+app.get("/pokemon/:index", (req, res) => {
+    const { index } = req.params;
+
+    if( pokemonArray[index] ){
+        res.json(pokemonArray[index]);
+    } else {
+        res.send(`Sorry, no pokemon found at ${index}`);
+    }
+});
 
 module.exports = app;
