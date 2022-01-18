@@ -5,8 +5,13 @@ const pokemon = require("./models/pokemon.json");
 //CONFIG
 const app = express();
 
-// GENERATOR/running/happy/sandwich
+// LITTLE BUGS
 app.get("/", (req, res) => {
+  res.send("Welcome 99 Pokemon");
+});
+
+// GENERATOR/running/happy/sandwich
+app.get("/:verb/:adjective/:noun", (req, res) => {
   const { verb, adjective, noun } = req.params;
   res.send(
     `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
@@ -14,9 +19,9 @@ app.get("/", (req, res) => {
 });
 
 // LITTLE BUGS
-app.get("/", (req, res) => {
-  res.send("Welcome 99 Pokemon");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome 99 Pokemon");
+// });
 
 app.get("/bugs", (req, res) => {
   res.send("<h2>99 little bugs in the code</h2>");
@@ -36,6 +41,7 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
   }
 });
 
+//LIST OF POKEMON
 app.get("/pokemon", (req, res) => {
   res.send(pokemon);
 });
@@ -49,6 +55,7 @@ app.get("/pokemon/search", (req, res) => {
   );
 });
 
+//INDEX?
 app.get("/pokemon/:index", (req, res) => {
   const { index } = req.params;
   if (pokemon[index]) {
