@@ -6,12 +6,12 @@ app.get("/", (request, response) => {
   response.send("Welcome 99 Pokemon");
 });
 
-// app.get("/:verb/:noun/:adjective", (request, response) => {
-//   const { verb, noun, adjective } = request.params;
-//   response.send(
-//     `Congratulations on starting a new project called ${verb}-${noun}-${adjective}!`
-//   );
-// });
+app.get("/:verb/:noun/:adjective", (request, response) => {
+  const { verb, noun, adjective } = request.params;
+  response.send(
+    `Congratulations on starting a new project called ${verb}-${noun}-${adjective}!`
+  );
+});
 
 app.get("/bugs", (request, response) => {
   response.send(
@@ -56,13 +56,6 @@ app.get("/pokemon/:index", (request, response) => {
   } else {
     response.send(pokemons[index]);
   }
-});
-
-app.get("/:verb/:noun/:adjective", (request, response) => {
-  const { verb, noun, adjective } = request.params;
-  response.send(
-    `Congratulations on starting a new project called ${verb}-${noun}-${adjective}!`
-  );
 });
 
 module.exports = app;
