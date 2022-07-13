@@ -40,6 +40,18 @@ app.get("/", (req, res) => {
   res.send("Welcome 99 Pokemon");
 });
 
+app.get("/pokemon/search", (request, response) => {
+  const { name } = request.query;
+  const foundPokemon = pokemon.find((pokemon) => {
+    return pokemon.name.toLowerCase() === name.toLowerCase();
+  });
+  if (foundPokemon) {
+    response.send([foundPokemon]);
+  } else {
+    response.send([]);
+  }
+});
+
 app.get("/pokemon/:indexOfArray", (req, res) => {
   const { indexOfArray } = req.params;
   if (indexOfArray < pokemon.length) {
