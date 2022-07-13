@@ -8,42 +8,35 @@ const app = express();
 // ROUTES
 //home route
 app.get('/', (req, res) => {
-  res.send('Welcome to 99 Pokemon App');
+  res.send('Welcome 99 Pokemon');
 });
 
-//bugs route
+// //bugs route
 app.get('/bugs', (req, res) => {
   //this will never be reached
   res.send(`
       <h1>99 little bugs in the code</h1>
       <a href="/bugs/101">pull one down, patch it around</a>
-      
+
     `);
 });
 
-//bugs/specific bugs variable route
+// //bugs/specific bugs variable route
 app.get('/bugs/:numberOfBugs', (req, res) => {
   const { numberOfBugs } = req.params;
-  if (Number(numberOfBugs) === 101) {
+
+  if (numberOfBugs < 200) {
     res.send(
-      `<a href="/bugs/${
-        Number(numberOfBugs) + 2
-      }">Pull one down, patch it around</a>`
-    );
-  } else if (numberOfBugs < 200) {
-    res.send(
-      `<h1>${numberOfBugs} little bugs in the code </h1> <a href="/bugs/${
+      `${numberOfBugs} little bugs in the code  <a href="/bugs/${
         Number(numberOfBugs) + 2
       }">Pull one down, patch it around</a>`
     );
   } else {
-    res.send(
-      `<h1>${numberOfBugs} little bugs in the code </h1><a href="/bugs"> Start over!</a>`
-    );
+    res.send(`Too many bugs!! Start over!<a href="/bugs">next</a>`);
   }
 });
 
-// ROUTES
+// // ROUTES
 
 app.get('/pokemon', (req, res) => {
   res.json(pokemon);
@@ -51,28 +44,34 @@ app.get('/pokemon', (req, res) => {
 
 app.get('/pokemon/search/', (req, res) => {
   //this will never be reached
-  let name = req.query.name;
+  let searchedName = req.query.name;
 
-  const pokemonFilter = pokemon.filter((ele) => {
-    return name.toLowerCase() === ele.name.toLowerCase();
+  const foundPokemon = pokemon.find((ele) => {
+    return searchedName.toLowerCase() === ele.name.toLowerCase();
   });
-  if (pokemonFilter.length > 0) {
-    res.json(pokemonFilter);
+  if (foundPokemon) {
+    res.json([foundPokemon]);
   } else {
     res.send('[]');
   }
 });
 
-app.get('/pokemon/:indexOfArray', (req, res) => {
-  //this will never be reached
-  const { indexOfArray } = req.params;
-
-  if (pokemon[indexOfArray].length > 0) {
-    res.json([indexOfArray]);
+app.get('/pokemon/:indexOfArray', (request, response) => {
+  const { indexOfArray } = request.params;
+  if (pokemon[indexOfArray]) {
+    response.send(pokemon[indexOfArray]);
   } else {
-    res.send(`Sorry, no pokemon found at ${[indexOfArray]}`);
+    response.send(`Sorry, no pokemon found at ${indexOfArray}`);
   }
 });
 
+//
+app.get('/:verb/:adjective/:noun', (req, res) => {
+  const { verb, adjective, noun } = req.params;
+
+  res.send(
+    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+  );
+});
 // EXPORT
 module.exports = app;
