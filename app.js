@@ -5,6 +5,8 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 
+const pokemon = require("./models/pokemon.json");
+
 app.get("/bugs/:numberOfBugs", (req, res) => {
   const { numberOfBugs } = req.params;
 
@@ -23,6 +25,29 @@ app.get("/bugs", (req, res) => {
   res.send(
     `<h1>99 little bugs in the code</h1><a href="/bugs/101">pull one down, patch it around</a>`
   );
+});
+
+app.get("/pokemon", (req, res) => {
+  res.json(pokemon);
+});
+
+app.get("/pokemon/search", (req, res) => {
+  const { name } = req.query;
+  const result = pokemon.find((pokemon) => {
+    return pokemon.name.toLowerCase() === name.toLowerCase();
+  });
+
+  res.send(result ? [result] : []);
+});
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+
+  if (pokemon[indexOfArray]) {
+    res.send(pokemon[indexOfArray]);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
 });
 
 app.get("/:verb/:adjective/:noun", (req, res) => {
