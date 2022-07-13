@@ -9,6 +9,15 @@ app.get("/", (req, res) => {
   res.send("Welcome 99 Pokemon");
 });
 
+// New Project Name Generator
+app.get("/:verb/:adjective/:noun", (req, res) => {
+  const { verb, adjective, noun } = req.params;
+
+  res.send(
+    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+  );
+});
+
 // 99 Little bugs in the code
 app.get("/bugs", (req, res) => {
   res.send(`
@@ -66,13 +75,46 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
   }
 });
 
-// New Project Name Generator
-app.get("/:verb/:adjective/:noun", (req, res) => {
-  const { verb, adjective, noun } = req.params;
+// Bonus
+app.get("/pokemon-pretty", (req, res) => {
+  res.send(`
+  <ul>
+  ${pokemon
+    .map((poke) => {
+      return `<li><a href="/pokemon-pretty/${pokemon.indexOf(poke)}">${
+        poke.name
+      }</a></li>`;
+    })
+    .join("<br />")}
+  </ul>
+  `);
+});
 
-  res.send(
-    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
-  );
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+  let indexOfArray = req.params.indexOfArray;
+
+  let pokemonIndex = Number(indexOfArray);
+
+  if (pokemonIndex < pokemon.length) {
+    res.send(`
+    <h1>${pokemon[pokemonIndex].name}</h1>
+    <img src="${pokemon[pokemonIndex].img}" alt="${
+      pokemon[pokemonIndex].name
+    }" />
+    <h2>Type: ${pokemon[pokemonIndex].type.join(", ")}</h2>
+    <h3>Stats:</h3>
+      <ul>
+        <li>HP: ${pokemon[pokemonIndex].stats.hp}</li>
+        <li>Attack: ${pokemon[pokemonIndex].stats.attack}</li>
+        <li>Defense: ${pokemon[pokemonIndex].stats.defense}</li>
+        <li>SPattack: ${pokemon[pokemonIndex].stats.spattack}</li>
+        <li>SPdefense: ${pokemon[pokemonIndex].stats.spdefense}</li>
+        <li>Speed: ${pokemon[pokemonIndex].stats.speed}</li>
+      </ul>
+    `);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
 });
 
 module.exports = app;
