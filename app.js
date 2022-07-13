@@ -36,6 +36,29 @@ app.get("/jumping/:joyous/:jellybean", (req, res) => {
   res.send("New project made");
 });
 
+app.get("/pokemon", (req, res) => {
+  res.send(pokemon);
+});
+app.get("/pokemon/search", (req, res) => {
+  const search = req.query.name;
+  const foundPokemon = pokemon.find((p) => {
+    return p.name.toLowerCase() === search.toLowerCase();
+  });
+  if (foundPokemon) {
+    res.send([foundPokemon]);
+  } else {
+    res.send([]);
+  }
+});
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (pokemon[indexOfArray]) {
+    res.send(pokemon[indexOfArray]);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
+
 module.exports = app;
 
 // app.listen(8888, () => {
