@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Let's Use EJS</title>
+  </head>
+  <body>
+    <h1><%= welcomeText %></h1>
+    <h2>My </h2>
+    <ul class="pokemon">
+      <%pokemon.forEach((poke)=>{ %>
+        <li>
+            <a href="/poke/<%= i %>"><%= poke[i].name%></a> </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
