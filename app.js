@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 
 const pokemon = require("./models/pokemon.json");
-console.log(pokemon[0]);
 
 app.get("/", (req, res) => {
   res.send("Welcome 99 Pokemon");
@@ -30,11 +29,6 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
   }
   res.send();
 });
-app.get("/jumping/:joyous/:jellybean", (req, res) => {
-  const { joyous, jellybean } = req.params;
-
-  res.send("New project made");
-});
 
 app.get("/pokemon", (req, res) => {
   res.send(pokemon);
@@ -59,8 +53,12 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
   }
 });
 
-module.exports = app;
+app.get("/:verb/:adjective/:noun", (req, res) => {
+  const { verb, adjective, noun } = req.params;
 
-// app.listen(8888, () => {
-//   console.log("Listening");
-// });
+  res.send(
+    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+  );
+});
+
+module.exports = app;
