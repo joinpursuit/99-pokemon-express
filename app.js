@@ -33,4 +33,24 @@ ${numberOfBugsPlusTwo} bugs in the code</p></h1>`
   }
 });
 
+// Poke-Express
+const pokemon = require("./models/pokemon.json");
+
+app.get("/", (req, res) => {
+  res.send("Welcome 99 Pokemon");
+});
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const { indexOfArray } = req.params;
+  if (indexOfArray < pokemon.length) {
+    res.send(pokemon[indexOfArray]);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
+
+app.get("/pokemon", (req, res) => {
+  res.send(pokemon);
+});
+
 module.exports = app;
