@@ -2,21 +2,13 @@ const express = require('express');
 require('dotenv').config();
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Welcome 99 Pokemon');
-});
+const pokemon = require('./models/pokemon.json');
 
 app.get('/:verb/:adjective/:noun', (req, res) => {
   const { verb, adjective, noun } = req.params;
-  if (verb === 'jumping' && adjective === 'joyous' && noun === 'jellybean') {
-    res.send(
-      'Congratulations on starting a new project called jumping-joyous-jellybean!'
-    );
-  } else {
-    res.send(
-      `Congratulations on starting a new project called ${verb} ${adjective} ${noun}!`
-    );
-  }
+  res.send(
+    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
+  );
 });
 
 app.get('/bugs', (req, res) => {
@@ -26,7 +18,6 @@ app.get('/bugs', (req, res) => {
 
 app.get('/bugs/:numberOfBugs', (req, res) => {
   let { numberOfBugs } = req.params;
-
   let numbugs = Number(numberOfBugs);
 
   if (numbugs < 200) {
@@ -37,6 +28,14 @@ app.get('/bugs/:numberOfBugs', (req, res) => {
         <h1>${numbugs} little bugs in the code</h1>
         <a href="/bugs">Too many bugs!! Start over!</a>`);
   }
+});
+
+app.get('/', (req, res) => {
+  res.send('Welcome 99 Pokemon');
+});
+
+app.get('/pokemon', (req, res) => {
+  res.send(pokemon);
 });
 
 app.listen(process.env.PORT, () => {
