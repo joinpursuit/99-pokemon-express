@@ -1,9 +1,5 @@
 const express = require("express");
 const app = express();
-
-require("dotenv").config();
-//const PORT = process.env.PORT;
-
 const pokemon = require("./models/pokemon.json");
 
 // Routes
@@ -18,7 +14,7 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
 	const { verb, adjective, noun } = req.params;
 	res.send(
     `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
-    );
+  );
 });
 
 //99 Little bugs in the code
