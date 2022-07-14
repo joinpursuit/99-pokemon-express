@@ -40,36 +40,38 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
       <a href="/bugs/${Number(numberOfBugs) + 2}">Pull one down, patch it around</a>`
     )
   :    
-		res.send(`Too many bugs!! Start over!
-      <a href="/bugs">Start over</a>`
-    )
+		res.send(`<h1>Too many bugs!! Start over!</h1><a href="/bugs">Start over</a>`)
 });
 
-//Pokemon
+// Pokemon
+
+// Get all pokemons
 app.get("/pokemon", (req, res) => {
 	res.send(pokemon);
 });
 
-app.get("/pokemon/search", (request, response) => {
-	const { name } = request.query;
-	let foundPokemon = pokemon.find((poke) => {
-		return poke.name.toLowerCase() === name.toLowerCase();
+// Search a pokemon for by name
+app.get("/pokemon/search", (req, res) => {
+   
+	const { name } = req.query;
+  // 
+	let foundPokemon = pokemon.find((e) => {
+		return e.name.toLowerCase() === name.toLowerCase();
 	});
-	if (foundPokemon != undefined) {
-		let dummy = [foundPokemon];
-		response.send(dummy);
-	} else {
-		response.send([]);
-	}
+  // Validating if pokemon was founded
+	(foundPokemon != undefined) ? res.send([foundPokemon]) : res.send([]);
 });
 
-app.get("/pokemon/:indexOfArray", (request, response) => {
-	const { indexOfArray } = request.params;
-	if (pokemon[indexOfArray]) {
-		response.send(pokemon[indexOfArray]);
-	} else {
-		response.send(`Sorry, no pokemon found at ${indexOfArray}`);
-	}
+// View pokemon
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  
+	const { indexOfArray } = req.params;
+  //
+	(pokemon[indexOfArray]) 
+  ?
+		res.send(pokemon[indexOfArray])
+	:
+		res.send(`Sorry, no pokemon found at ${indexOfArray}`);
 });
 
 module.exports = app;
