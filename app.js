@@ -23,7 +23,20 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
 
 // Bugs.
 app.get("/bugs", (req, res) => {
-  res.send("99 little bugs in the code.");
+  res.send(
+    `<h1>99 little bugs in the code. <br/> <a href="/bugs/101"> Pull on Down <br/> Patch it around</a></h1>`
+  );
+});
+
+app.get("/bugs/:numberOfBugs", (req, res) => {
+  const { numberOfBugs } = req.params;
+  if (numberOfBugs < 200) {
+    res.send(
+      `${numberOfBugs} little bugs in the code <br/> ${numberOfBugs} little bugs`
+    );
+  } else {
+    res.send("Too many bugs!! Start over!");
+  }
 });
 
 // Listener.
