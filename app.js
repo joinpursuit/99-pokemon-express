@@ -23,8 +23,9 @@ app.get("/bugs", (req, res) => {
 app.get("/bugs/:numberOfBugs", (req, res) => {
     const { numberOfBugs } = req.params;
     if (Number(numberOfBugs) < 200) {
-        const num = Number(numberOfBugs) + 2
-        res.send(`<a href='${num}'>Pull one down, patch it around</a>`)
+        const num = Number(numberOfBugs) + 2;
+        res.send(`${numberOfBugs} little bugs in the code \n <a href="http://localhost:8888/bugs/${num}">Pull one down, patch it around</a>
+        `)
     } else {
         res.send("Too many bugs!! Start over!")
     }
