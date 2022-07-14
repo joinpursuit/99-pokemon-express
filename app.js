@@ -103,9 +103,9 @@ app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
 });
 
 /**
- * getPrettyView() function generates a random index between 0 and array length
- * @param  {number} min min value equals to the first position
- * @return {number}     Number that represents a random index
+ * getPrettyView() function generates a pokemon pretty view
+ * @param  {object} poke object that represents a pokemon object data
+ * @return {string}      string with the all html structure
  */
  function getPrettyView(poke) {
   let view = `
