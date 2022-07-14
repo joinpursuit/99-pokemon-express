@@ -11,6 +11,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "author": "K. Rafalski",
+  "author": "Candace Garvin",
   "license": "ISC",
   "description": "",
   "devDependencies": {
