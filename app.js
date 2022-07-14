@@ -1,25 +1,45 @@
  //
 const express = require('express');
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[0]);
 
 const app = express();
 
+// Routes
+
+// Home
 app.get('/', (req, res) => {
-  res.send('Testing server')
+  res.send('Welcome 99 Pokemon App')
 })
 
+// New Project Name Generator route
+app.get('/:verb/:adjective/:noun', (req, res) => {
+  const { verb, adjective, noun } = request.params;
+
+  res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`)
+})
+
+// 99 Little Bugs In the Code routes
+//
 app.get('/bugs', (req, res) => {
   res.send(`<p>99 little bugs in the code</p><a href="/bugs/${getNumber(0, 101)}">pull one down, patch it around</a>`)
 })
-
+// 
 app.get('/bugs/:numberOfBugs', (req, res) => {
-  res.send(`<p>${req.params.numberOfBugs} little bugs in the code</p>${validateNumOfBugs(req.params.numberOfBugs)}`)
+  const { numberOfBugs } = req.params;
+
+  res.send(`<p>${numberOfBugs} little bugs in the code</p>${validateNumOfBugs(numberOfBugs)}`)
 })
 
-app.get('/:verb/:adjective/:noun', (req, res) => {
-  res.send(`Congratulations on starting a new project called ${req.params.verb}-${req.params.adjective}-${req.params.noun}!`)
-})
+
 
 /**
+ ******************************************************************
+ * * * * H E L P E R S * * *
+ ******************************************************************
+ */
+
+ /**
  * [getNumber() function generates a random index between 0 and 101]
  * @param  {number} min [min value equals to be generated]
  * @param  {number} max [max value equals to be generated]
