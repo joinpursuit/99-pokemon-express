@@ -62,7 +62,7 @@ app.get("/pokemon/search", (req, res) => {
 	res.send((findByName) ? [findByName] : []);
 });
 
-// View pokemon by index
+// Pokemon view by index
 app.get("/pokemon/:indexOfArray", (req, res) => {
   
 	const { indexOfArray } = req.params;
@@ -74,17 +74,57 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
   );
 });
 
-
-
 // Bonus
 
-// Get all pokemon data
+// Get all pokemon prettier list
 app.get("/pokemon-pretty/", (req, res) => {
   let pokeList = '';
   pokemon.forEach((poke, index) => {
-    pokeList += `<li><a href="/pokemon/${index}">${poke.name}</a></li>`;   
+    pokeList += `<li><a href="/pokemon-pretty/${index}">${poke.name}</a></li>`;   
   })
 	res.send(`<ul style="">${pokeList}</ul>`);
 });
+
+// Pokemon prettier view by index
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+  
+	const { indexOfArray } = req.params;
+  
+  // Validating if pokemon's index exist
+  res.send((pokemon[indexOfArray]) 
+    ? getPrettyView(pokemon[indexOfArray]) 
+    : `Sorry, no pokemon found at ${indexOfArray}`
+  );
+});
+
+/**
+ * getPrettyView() function generates a random index between 0 and array length
+ * @param  {number} min min value equals to the first position
+ * @return {number}     Number that represents a random index
+ */
+ function getPrettyView(poke) {
+  let view = `
+            <div style="width: 50%;margin: auto;text-align: center">
+              <h2>${poke.name}</h2>
+              <img src="${poke.img}" alt="${poke.name}" />
+              <table style="margin: 2rem auto;border: 1px solid #CCC;border-radius: 3px;border-collapse:collapse;">
+              <tr style="background-color: #457b9d;color: #FFF;text-align: center">
+                <th style="padding: 1rem">classification</th>
+                <th style="padding: 1rem">height</th>
+                <th style="padding: 1rem">weight</th>
+                <th style="padding: 1rem">happiness</th>
+              </tr>
+              <tr style="text-align: center">
+                <td style="padding: 1rem">${poke.misc.classification}</td>
+                <td style="padding: 1rem">${poke.misc.height}</td>
+                <td style="padding: 1rem">${poke.misc.weight}</td>
+                <td style="padding: 1rem">${poke.misc.happiness}</td>
+              </tr>
+            </table>
+            <a style="text-align: center" href="/pokemon-pretty">Back to the list</a>
+            </div>
+            `;
+  return view; 
+}
 
 module.exports = app;
