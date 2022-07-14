@@ -12,8 +12,8 @@ app.get("/bugs", (req, res) => {
 app.get("/bugs/:numberOfBugs", (req, res) => {
     // console.log(req.params)
     const { numberOfBugs } = req.params;
-    // const newNum = num + 2;
     const bugNum = Number(numberOfBugs)
+    const newNum = bugNum + 2;
     if ( bugNum < 200) {
         res.send(`${bugNum} little bugs in the code`)
     } else {
