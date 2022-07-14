@@ -80,9 +80,14 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
 app.get("/pokemon-pretty/", (req, res) => {
   let pokeList = '';
   pokemon.forEach((poke, index) => {
-    pokeList += `<li><a href="/pokemon-pretty/${index}">${poke.name}</a></li>`;   
+    pokeList += `<li style="padding: 0.5rem;margin: 1px 0 0;background-color: #caf0f8;text-align: center;"><a style="display: block;text-decoration: none;font-size: 1.4rem;font-weight: bold;color: #0081a7" href="/pokemon-pretty/${index}">${poke.name}</a></li>`;   
   })
-	res.send(`<ul style="">${pokeList}</ul>`);
+	res.send(
+    `
+    <h2 style="margin: 1rem auto;text-align: center;font-size: 1.8rem;letter-spacing: 2px">Pokemon pretty list</h2>
+    <ul style="width: 30%;margin: auto;list-style: none">${pokeList}</ul>
+    `
+  );
 });
 
 // Pokemon prettier view by index
@@ -104,24 +109,24 @@ app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
  */
  function getPrettyView(poke) {
   let view = `
-            <div style="width: 50%;margin: auto;text-align: center">
-              <h2>${poke.name}</h2>
+            <div style="width: 50%;margin: 1rem auto;text-align: center">
+              <h2 style="margin: 1rem auto">${poke.name}</h2>
               <img src="${poke.img}" alt="${poke.name}" />
-              <table style="margin: 2rem auto;border: 1px solid #CCC;border-radius: 3px;border-collapse:collapse;">
-              <tr style="background-color: #457b9d;color: #FFF;text-align: center">
-                <th style="padding: 1rem">classification</th>
-                <th style="padding: 1rem">height</th>
-                <th style="padding: 1rem">weight</th>
-                <th style="padding: 1rem">happiness</th>
+              <table style="margin: 2rem auto;border: 1px solid #CCC;border-radius: 3px;border-collapse: collapse;">
+              <tr style="background-color: #98c1d9;color: #3d5a80;text-align: center">
+                <th style="padding: 1rem;border: 1px solid #ccc;">Classification</th>
+                <th style="padding: 1rem;border: 1px solid #ccc;">Height</th>
+                <th style="padding: 1rem;border: 1px solid #ccc;">Weight</th>
+                <th style="padding: 1rem;border: 1px solid #ccc;">Happiness</th>
               </tr>
               <tr style="text-align: center">
-                <td style="padding: 1rem">${poke.misc.classification}</td>
-                <td style="padding: 1rem">${poke.misc.height}</td>
-                <td style="padding: 1rem">${poke.misc.weight}</td>
-                <td style="padding: 1rem">${poke.misc.happiness}</td>
+                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.classification}</td>
+                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.height}</td>
+                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.weight}</td>
+                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.happiness}</td>
               </tr>
             </table>
-            <a style="text-align: center" href="/pokemon-pretty">Back to the list</a>
+            <a style="padding: 0.8rem 2rem;border: 1px solid #ccc;text-align: center;text-decoration: none;background-color: #0077b6;color: #FFF;border: none" href="/pokemon-pretty">Back to the list</a>
             </div>
             `;
   return view; 
