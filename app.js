@@ -21,7 +21,8 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
 app.get("/bugs", (req, res) => {
 	res.send(
     `<h1>99 little bugs in the code</h1>
-     <a href="/bugs/101">Pull one down, patch it around</a>`
+      <a href="/bugs/101">Pull one down, patch it around</a>
+    `
   );
 });
 app.get("/bugs/:numberOfBugs", (req, res) => {
@@ -30,14 +31,15 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
 	(Number(numberOfBugs) < 200) 
   ?
 		res.send(
-      `<div style="padding: 4rem;margin: 0;height: 100vh;text-align: center;font-size: 4rem;text-decoration: underline;background-color:#0081a7;color: #FFF">
-        <h1>${numberOfBugs} little bugs in the code</h1> 
+      `<h1>${numberOfBugs} little bugs in the code</h1> 
         <a href="/bugs/${Number(numberOfBugs) + 2}">Pull one down, patch it around</a>
-       </div>
       `
     )
   :    
-		res.send(`<h1>Too many bugs!! Start over!</h1><a href="/bugs">Start over</a>`)
+		res.send(
+      `<h1>Too many bugs!! Start over!</h1>
+       <a href="/bugs">Start over</a>`
+    )
 });
 
 // Pokemon
@@ -60,7 +62,6 @@ app.get("/pokemon/search", (req, res) => {
 	res.send((findByName) ? [findByName] : []);
 });
 
-
 // View pokemon by index
 app.get("/pokemon/:indexOfArray", (req, res) => {
   
@@ -71,6 +72,19 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
     ? pokemon[indexOfArray] 
     : `Sorry, no pokemon found at ${indexOfArray}`
   );
+});
+
+
+
+// Bonus
+
+// Get all pokemon data
+app.get("/pokemon-pretty/", (req, res) => {
+  let pokeList = '';
+  pokemon.forEach((poke, index) => {
+    pokeList += `<li><a href="/pokemon/${index}">${poke.name}</a></li>`;   
+  })
+	res.send(`<ul style="">${pokeList}</ul>`);
 });
 
 module.exports = app;
