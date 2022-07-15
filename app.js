@@ -1,14 +1,16 @@
 //dependencies
 
 const express = require("express");
-const pokemon = require("./models/pokemon");
-console.log(pokemon[0]);
+const pokemon = require("./models/pokemon.json");
 
 //config
 
 const app = express();
 
 //routes
+app.get("/", (req, res) => {
+  res.send("Welcome 99 Pokemon");
+});
 
 app.get("/:v/:a/:n", (req, res) => {
   const { v, a, n } = req.params;
@@ -26,21 +28,21 @@ app.get("/bugs", (req, res) => {
 
 app.get("/bugs/:numberOfBugs", (req, res) => {
   const { numberOfBugs } = req.params;
-  if (numberOfBugs > 200) {
-    res.send(`<a href='/bugs'>start over</a>`);
+  if (numberOfBugs >= 200) {
+    res.send(`Too many bugs!! Start over!`);
   } else {
     res.send(
       `<div>
         ${numberOfBugs} little bugs in the code  
          <a href='/bugs/${
            Number(numberOfBugs) + 2
-         }'>pull one down, patch it around</a></div>`
+         }'>Pull one down, patch it around</a></div>`
     );
   }
 });
 
 app.get("/pokemon", (req, res) => {
-  res.send(`<div>${pokemon.map((e) => e.name)}<div>`);
+  res.json(pokemon);
 });
 
 app.get("/pokemon/search/", (req, res) => {
@@ -59,13 +61,9 @@ app.get("/pokemon/search/", (req, res) => {
 app.get("/pokemon/:indexOfArray", (req, res) => {
   const { indexOfArray } = req.params;
   if (!pokemon[Number(indexOfArray)]) {
-    res.send(`No such pokemon found at /pokemon/${indexOfArray}`);
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
   } else {
-    res.send(
-      `<img src='${pokemon[Number(indexOfArray)].img}' alt=${
-        pokemon[Number(indexOfArray)].name
-      }/>`
-    );
+    res.json(pokemon[indexOfArray]);
   }
 });
 //exports
