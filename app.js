@@ -17,12 +17,11 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
   );
 });
 
-//99 Little bugs in the code
+// 99 Little bugs in the code
 app.get("/bugs", (req, res) => {
 	res.send(
-    `<h1>99 little bugs in the code</h1>
-      <a href="/bugs/101">Pull one down, patch it around</a>
-    `
+    `<h1 style="width:100%;margin: 4rem 0;text-align: center;font-family: helvetica;color: #0081a7">99 little bugs in the code</h1>
+     <a style="padding: 1rem 2rem;margin: 1rem auto;display: table;border-radius: 3px;font-family: helvetica;text-decoration: none;background-color: #00afb9;color: #FFF" href="/bugs/101">Pull one down, patch it around</a>`
   );
 });
 app.get("/bugs/:numberOfBugs", (req, res) => {
@@ -31,14 +30,13 @@ app.get("/bugs/:numberOfBugs", (req, res) => {
 	(Number(numberOfBugs) < 200) 
   ?
 		res.send(
-      `<h1>${numberOfBugs} little bugs in the code</h1> 
-        <a href="/bugs/${Number(numberOfBugs) + 2}">Pull one down, patch it around</a>
-      `
+      `<h1 style="width:100%;margin: 4rem 0;text-align: center;font-family: helvetica;color: #006d77">${numberOfBugs} little bugs in the code</h1> 
+       <a style="padding: 1rem 2rem;margin: 1rem auto;display: table;border-radius: 3px;font-family: helvetica;text-decoration: none;background-color: #2ec4b6;color: #FFF" href="/bugs/${Number(numberOfBugs) + 2}">Pull one down, patch it around</a>`
     )
   :    
 		res.send(
-      `<h1>Too many bugs!! Start over!</h1>
-       <a href="/bugs">Start over</a>`
+      `<h1 style="width:100%;margin: 4rem 0;text-align: center;font-family: helvetica;color: #e56b6f">Too many bugs!! Start over!</h1>
+       <a style="padding: 1rem 2rem;margin: 1rem auto;display: table;border-radius: 3px;font-family: helvetica;text-decoration: none;background-color: #ff5400;color: #FFF" href="/bugs">Start over</a>`
     )
 });
 
@@ -80,13 +78,11 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
 app.get("/pokemon-pretty/", (req, res) => {
   let pokeList = '';
   pokemon.forEach((poke, index) => {
-    pokeList += `<li style="padding: 0.5rem;margin: 1px 0 0;background-color: #caf0f8;text-align: center;"><a style="display: block;text-decoration: none;font-size: 1.4rem;font-weight: bold;color: #0081a7" href="/pokemon-pretty/${index}">${poke.name}</a></li>`;   
+    pokeList += `<li style="padding: 1.0rem;margin: 1px 0 0;background-color: #caf0f8;text-align: center;"><a style="display: block;text-decoration: none;font-family: helvetica;font-size: 1.2rem;font-weight: bold;color: #0081a7" href="/pokemon-pretty/${index}">${poke.name}</a></li>`;   
   })
 	res.send(
-    `
-    <h2 style="margin: 1rem auto;text-align: center;font-size: 1.8rem;letter-spacing: 2px">Pokemon pretty list</h2>
-    <ul style="width: 30%;margin: auto;list-style: none">${pokeList}</ul>
-    `
+    `<h1 style="margin: 1rem auto;text-align: center;font-family: helvetica;letter-spacing: 2px;color: #3d5a80">Pokemon pretty list</h1>
+     <ul style="width: 30%;padding: 0;margin: auto;list-style: none">${pokeList}</ul>`
   );
 });
 
@@ -102,6 +98,9 @@ app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
   );
 });
 
+// Bonus Bonus
+
+
 /**
  * getPrettyView() function generates a pokemon pretty view
  * @param  {object} poke object that represents a pokemon object data
@@ -110,23 +109,23 @@ app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
  function getPrettyView(poke) {
   let view = `
             <div style="width: 50%;margin: 1rem auto;text-align: center">
-              <h2 style="margin: 1rem auto">${poke.name}</h2>
+              <h1 style="margin: 1rem auto;font-family: helvetica;color: #3d5a80;letter-spacing: 2px">${poke.name}</h1>
               <img src="${poke.img}" alt="${poke.name}" />
               <table style="margin: 2rem auto;border: 1px solid #CCC;border-radius: 3px;border-collapse: collapse;">
               <tr style="background-color: #98c1d9;color: #3d5a80;text-align: center">
-                <th style="padding: 1rem;border: 1px solid #ccc;">Classification</th>
-                <th style="padding: 1rem;border: 1px solid #ccc;">Height</th>
-                <th style="padding: 1rem;border: 1px solid #ccc;">Weight</th>
-                <th style="padding: 1rem;border: 1px solid #ccc;">Happiness</th>
+                <th style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">Classification</th>
+                <th style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">Height</th>
+                <th style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">Weight</th>
+                <th style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">Happiness</th>
               </tr>
               <tr style="text-align: center">
-                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.classification}</td>
-                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.height}</td>
-                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.weight}</td>
-                <td style="padding: 1rem;border: 1px solid #ccc;">${poke.misc.happiness}</td>
+                <td style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">${poke.misc.classification}</td>
+                <td style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">${poke.misc.height}</td>
+                <td style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">${poke.misc.weight}</td>
+                <td style="padding: 1rem;font-family: helvetica;border: 1px solid #ccc;">${poke.misc.happiness}</td>
               </tr>
-            </table>
-            <a style="padding: 0.8rem 2rem;border: 1px solid #ccc;text-align: center;text-decoration: none;background-color: #0077b6;color: #FFF;border: none" href="/pokemon-pretty">Back to the list</a>
+              </table>
+              <a style="padding: 0.8rem 2rem;font-family: helvetica;border: 1px solid #ccc;text-align: center;text-decoration: none;background-color: #0077b6;color: #FFF;border: none" href="/pokemon-pretty">Back to the list</a>
             </div>
             `;
   return view; 
