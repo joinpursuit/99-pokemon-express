@@ -2,9 +2,10 @@
 
 Here, we will build 3 small projects in one to keep learning express.
 
-## Getting Started
+## Getting Started [ok]
 
 - Fork this repo
+
 - `git clone` the forked repository
 - `cd` to the directory where you cloned it
 - `npm install` to install dependencies that are already included in the `package.json`
@@ -26,7 +27,7 @@ PORT=8888
 - When finished, commit and push your work.
 - Make a pull request on GitHub.
 
-## New Project Name Generator
+## New Project Name Generator [ok]
 
 Let's start with a simple activity.
 Make a route that takes 3 parameters in the URL
@@ -85,7 +86,7 @@ Confirm you are able to bring in the data from the `pokemon.json` file
 **app.js**
 
 ```js
-const pokemon = require("./pokemon.json");
+const pokemon = require('./pokemon.json');
 console.log(pokemon[0]);
 ```
 
