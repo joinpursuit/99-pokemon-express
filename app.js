@@ -1,7 +1,6 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-
 const pokemon = require('./models/pokemon.json');
 
 app.get('/:verb/:adjective/:noun', (req, res) => {
@@ -38,6 +37,30 @@ app.get('/pokemon', (req, res) => {
   res.send(pokemon);
 });
 
+app.get('/pokemon/search', (req, res) => {
+  const search = req.query.name;
+  let foundPoke = pokemon.find(
+    (poke) => poke.name.toLowerCase() === search.toLowerCase()
+  );
+
+  if (foundPoke) {
+    res.send([foundPoke]);
+  } else {
+    res.send([]);
+  }
+});
+
+app.get('/pokemon/:indexOfArray', (req, res) => {
+  const { indexOfArray } = req.params;
+  if (pokemon[indexOfArray]) {
+    res.send(pokemon[indexOfArray]);
+  } else {
+    res.send(`Sorry, no pokemon found at ${indexOfArray}`);
+  }
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`);
 });
+
+module.exports = app;
