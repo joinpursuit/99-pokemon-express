@@ -1,7 +1,7 @@
 const express = require("express");
 
 const app = express();
-console.log(pokemon[o]);
+// console.log(pokemon[o]);
 
 app.get("/", (req, res) => {
     res.send("Welcome 99 Pokemon")
