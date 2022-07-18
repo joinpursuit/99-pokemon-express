@@ -40,6 +40,19 @@ app.get ("/pokemon/:indexOfArray", function (req, res) {
         res.send(pokemon[indexOfArray])
     }
 })
+app.get("/pokemon/search/", function (req, res) {
+    const {name} = req.query 
+    const searchPokemon = pokemon.find((pokemn) => {
+        return pokemn.name.toLowerCase() === name.toLowerCase()
+    }
+    )
+    if (searchPokemon) {
+        res.send([searchPokemon])
+    }else {
+        res.send([])
+    }
+})
+
 
 module.exports = app;
 
