@@ -32,6 +32,19 @@ app.get("/bugs/:numberOfBugs", function (req, res) {
 app.get ("/pokemon", function (req, res) {
     res.send(pokemon)
 });
+app.get("/pokemon/search/", function (req, res) {
+    const {name} = req.query 
+
+    if (!pokemon.filter((pokemn) => {
+        return pokemn.name === name})
+    ){
+        res.send("[]")
+    }else {
+        res.send(pokemon.filter((pokemn) => {
+            return pokemn.name.toLowerCase() === name.toLowerCase();
+        }))
+    }
+})
 app.get ("/pokemon/:indexOfArray", function (req, res) {
     const {indexOfArray} = req.params;
     if (!pokemon[indexOfArray]) {
@@ -40,18 +53,7 @@ app.get ("/pokemon/:indexOfArray", function (req, res) {
         res.send(pokemon[indexOfArray])
     }
 })
-app.get("/pokemon/search/", function (req, res) {
-    const {name} = req.query 
-    const searchPokemon = pokemon.find((pokemn) => {
-        return pokemn.name.toLowerCase() === name.toLowerCase()
-    }
-    )
-    if (searchPokemon) {
-        res.send([searchPokemon])
-    }else {
-        res.send([])
-    }
-})
+
 
 
 module.exports = app;
